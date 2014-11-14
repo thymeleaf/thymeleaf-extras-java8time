@@ -56,7 +56,14 @@ Features
 --------
 
 This module adds a `#temporals` object similar to the `#dates` or `#calendar` ones in
-the Standard Dialect
+the Standard Dialect, allowing the formatting and creation of temporal objects from
+Thymeleaf templates.
+
+![Java 8 Time API](/src/main/resources/temporal.png "Java 8 Time API")
+
+
+Usage
+-----
 
 ```java
 /*
