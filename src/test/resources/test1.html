@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Testing conditional comments</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="../static-css/style1.css" th:href="@{http://localhost/css/style1.css}" />
+    <!--[if lt IE 8]>
+            <link rel="stylesheet" href="../static-css/styleIE67.css" th:href="@{http://localhost/css/styleIE67.css}" type="text/css" media="screen, projection" />
+            <body>
+              <p th:text="'Pepitoooo!'">lele
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="all" href="../static-css/style2.css" th:href="@{http://localhost/css/style2.css}" />
+  </head>
+
+  <body>
+
+    <h1>
+      This works!
+    </h1>
+  
+  </body>
+  
+</html>
+

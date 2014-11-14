@@ -49,13 +49,13 @@ Installation
 
 Just add the `org.thymeleaf.extras.java8time.dialect.Java8TimeDialect`
 class to the list of dialects in your TemplateEngine implementation, and you will
-have the #temporals object available to be used in your templates.
+have the `#temporals` object available to be used in your templates.
 
 
 Features
 --------
 
-This module add a #temporals object similar to the #dates or #calendar ones in
+This module adds a `#temporals` object similar to the `#dates` or `#calendar` ones in
 the Standard Dialect
 
 ```java
@@ -117,5 +117,6 @@ ${#temporals.createNow()}
  * Create a temporal (java.time.Temporal) object for the current date (time set to 00:00)
  */
 ${#temporals.createToday()}
+
 ```
 
