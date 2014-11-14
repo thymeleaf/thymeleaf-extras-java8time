@@ -19,7 +19,6 @@
  */
 package org.thymeleaf.extras.java8time.dialect;
 
-
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -28,29 +27,32 @@ import org.thymeleaf.dialect.AbstractDialect;
 import org.thymeleaf.dialect.IExpressionEnhancingDialect;
 import org.thymeleaf.extras.java8time.expression.Temporals;
 
-
-
+/**
+ * Thymeleaf Dialect to format and create Java 8 Time object.
+ * 
+ * @since 2.1.3
+ */
 public class Java8TimeDialect extends AbstractDialect implements IExpressionEnhancingDialect {
 
     public static final String TEMPORAL_EVALUATION_VARIABLE_NAME = "temporals";
-    
+
     public Java8TimeDialect() {
         super();
     }
 
-    
-    
+    @Override
     public String getPrefix() {
         // No attribute or tag processors, so we don't need a prefix at all and
         // we can return whichever value.
         return "java8time";
     }
 
-    
+    @Override
     public boolean isLenient() {
         return false;
     }
 
+    @Override
     public Map<String, Object> getAdditionalExpressionObjects(IProcessingContext processingContext) {
         Map<String, Object> expressionObjects = new HashMap<>();
         Locale locale = processingContext.getContext().getLocale();
