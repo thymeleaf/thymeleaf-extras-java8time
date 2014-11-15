@@ -19,6 +19,7 @@
  */
 package org.thymeleaf.extras.java8time.expression;
 
+import java.time.ZoneId;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -27,8 +28,11 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.thymeleaf.exceptions.TemplateProcessingException;
+import org.thymeleaf.extras.java8time.util.TemporalArrayUtils;
 import org.thymeleaf.extras.java8time.util.TemporalCreationUtils;
-import org.thymeleaf.extras.java8time.util.TemporalUtils;
+import org.thymeleaf.extras.java8time.util.TemporalFormattingUtils;
+import org.thymeleaf.extras.java8time.util.TemporalListUtils;
+import org.thymeleaf.extras.java8time.util.TemporalSetUtils;
 import org.thymeleaf.util.Validate;
 
 /**
@@ -40,64 +44,78 @@ import org.thymeleaf.util.Validate;
  * <tt>#temporals</tt>.
  * </p>
  *
- * @since 2.1.3
+ * @since 2.1.4
  */
 public final class Temporals {
 
     private final Locale locale;
+    private final TemporalCreationUtils temporalCreationUtils;
+    private final TemporalFormattingUtils temporalFormattingUtils;
+    private final TemporalArrayUtils temporalArrayUtils;
+    private final TemporalListUtils temporalListUtils;
+    private final TemporalSetUtils temporalSetUtils;
 
     public Temporals(final Locale locale) {
+        this(locale, ZoneId.systemDefault());
+    }
+
+    public Temporals(final Locale locale, final ZoneId defaultZoneId) {
         super();
         Validate.notNull(locale, "Locale cannot be null");
         this.locale = locale;
+        this.temporalCreationUtils = new TemporalCreationUtils();
+        this.temporalFormattingUtils = new TemporalFormattingUtils(locale, defaultZoneId);
+        this.temporalArrayUtils = new TemporalArrayUtils(locale, defaultZoneId);
+        this.temporalListUtils = new TemporalListUtils(locale, defaultZoneId);
+        this.temporalSetUtils = new TemporalSetUtils(locale, defaultZoneId);
     }
 
     /**
      *
      * @return a instance of java.time.LocalDate
-     * @since 2.1.3
+     * @since 2.1.4
      */
     public Temporal create(final Object year, final Object month, final Object day) {
-        return TemporalCreationUtils.create(year, month, day);
+        return temporalCreationUtils.create(year, month, day);
     }
 
     /**
      *
      * @return a instance of java.time.LocalDateTime
-     * @since 2.1.3
+     * @since 2.1.4
      */
     public Temporal create(final Object year, final Object month, final Object day,
         final Object hour, final Object minute) {
-        return TemporalCreationUtils.create(year, month, day, hour, minute);
+        return temporalCreationUtils.create(year, month, day, hour, minute);
     }
 
     /**
      *
      * @return a instance of java.time.LocalDateTime
-     * @since 2.1.3
+     * @since 2.1.4
      */
     public Temporal create(final Object year, final Object month, final Object day,
         final Object hour, final Object minute, final Object second) {
-        return TemporalCreationUtils.create(year, month, day, hour, minute, second);
+        return temporalCreationUtils.create(year, month, day, hour, minute, second);
     }
 
     /**
      *
      * @return a instance of java.time.LocalDateTime
-     * @since 2.1.3
+     * @since 2.1.4
      */
     public Temporal create(final Object year, final Object month, final Object day,
         final Object hour, final Object minute, final Object second, final Object millisecond) {
-        return TemporalCreationUtils.create(year, month, day, hour, minute, second, millisecond);
+        return temporalCreationUtils.create(year, month, day, hour, minute, second, millisecond);
     }
 
     /**
      *
      * @return a instance of java.time.LocalDateTime
-     * @since 2.1.3
+     * @since 2.1.4
      */
     public Temporal createNow() {
-        return TemporalCreationUtils.createNow();
+        return temporalCreationUtils.createNow();
     }
 
     /**
@@ -106,16 +124,16 @@ public final class Temporals {
      * @since 2.1.0
      */
     public Temporal createNowForTimeZone(final Object timeZone) {
-        return TemporalCreationUtils.createNowForTimeZone(timeZone);
+        return temporalCreationUtils.createNowForTimeZone(timeZone);
     }
 
     /**
      *
      * @return a instance of java.time.LocalDate
-     * @since 2.1.3
+     * @since 2.1.4
      */
     public Temporal createToday() {
-        return TemporalCreationUtils.createToday();
+        return temporalCreationUtils.createToday();
     }
 
     /**
@@ -124,114 +142,64 @@ public final class Temporals {
      * @since 2.1.0
      */
     public Temporal createTodayForTimeZone(final Object zoneId) {
-        return TemporalCreationUtils.createTodayForTimeZone(zoneId);
+        return temporalCreationUtils.createTodayForTimeZone(zoneId);
     }
 
     public String format(final Temporal target) {
-        try {
-            return TemporalUtils.format(target, this.locale);
-        } catch (final Exception e) {
-            throw new TemplateProcessingException(
-                "Error formatting date with standard format for locale " + this.locale, e);
-        }
+        return temporalFormattingUtils.format(target);
     }
 
     public String[] arrayFormat(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = format((Temporal) target[i]);
-        }
-        return result;
+        return temporalArrayUtils.arrayFormat(target);
     }
 
     public List<String> listFormat(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<String> result = new ArrayList<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(format(element));
-        }
-        return result;
+        return temporalListUtils.listFormat(target);
     }
 
     public Set<String> setFormat(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<String> result = new LinkedHashSet<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(format(element));
-        }
-        return result;
+        return temporalSetUtils.setFormat(target);
     }
 
     public String format(final Temporal target, final String pattern) {
-        try {
-            return TemporalUtils.format(target, pattern, this.locale);
-        } catch (final Exception e) {
-            throw new TemplateProcessingException(
-                "Error formatting date with format pattern \"" + pattern + "\"", e);
-        }
+        return temporalFormattingUtils.format(target, pattern);
     }
 
     public String[] arrayFormat(final Object[] target, final String pattern) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = format((Temporal) target[i], pattern);
-        }
-        return result;
+        return temporalArrayUtils.arrayFormat(target, pattern);
     }
 
     public List<String> listFormat(final List<? extends Temporal> target, final String pattern) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<String> result = new ArrayList<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(format(element, pattern));
-        }
-        return result;
+        return temporalListUtils.listFormat(target, pattern);
     }
 
     public Set<String> setFormat(final Set<? extends Temporal> target, final String pattern) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<String> result = new LinkedHashSet<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(format(element, pattern));
-        }
-        return result;
+        return temporalSetUtils.setFormat(target, pattern);
     }
 
     public Integer day(final Temporal target) {
-        return TemporalUtils.day(target);
+        return temporalFormattingUtils.day(target);
     }
 
     public Integer[] arrayDay(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = day((Temporal) target[i]);
-        }
-        return result;
+        return temporalArrayUtils.arrayDay(target);
     }
 
     public List<Integer> listDay(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<Integer> result = new ArrayList<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(day(element));
-        }
-        return result;
+        return temporalListUtils.listDay(target);
     }
 
     public Set<Integer> setDay(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<Integer> result = new LinkedHashSet<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(day(element));
-        }
-        return result;
+        return temporalSetUtils.setDay(target);
     }
 
+    /***********************************************************************************************/ 
+    /***********************************************************************************************/ 
+    /***********************************************************************************************/ 
+    /***********************************************************************************************/ 
+   
     public Integer month(final Temporal target) {
-        return TemporalUtils.month(target);
+        return temporalFormattingUtils.month(target);
     }
 
     public Integer[] arrayMonth(final Object[] target) {
@@ -262,7 +230,7 @@ public final class Temporals {
     }
 
     public String monthName(final Temporal target) {
-        return TemporalUtils.monthName(target, this.locale);
+        return temporalFormattingUtils.monthName(target);
     }
 
     public String[] arrayMonthName(final Object[] target) {
@@ -293,7 +261,7 @@ public final class Temporals {
     }
 
     public String monthNameShort(final Temporal target) {
-        return TemporalUtils.monthNameShort(target, this.locale);
+        return temporalFormattingUtils.monthNameShort(target);
     }
 
     public String[] arrayMonthNameShort(final Object[] target) {
@@ -324,7 +292,7 @@ public final class Temporals {
     }
 
     public Integer year(final Temporal target) {
-        return TemporalUtils.year(target);
+        return temporalFormattingUtils.year(target);
     }
 
     public Integer[] arrayYear(final Object[] target) {
@@ -355,7 +323,7 @@ public final class Temporals {
     }
 
     public Integer dayOfWeek(final Temporal target) {
-        return TemporalUtils.dayOfWeek(target);
+        return temporalFormattingUtils.dayOfWeek(target);
     }
 
     public Integer[] arrayDayOfWeek(final Object[] target) {
@@ -386,7 +354,7 @@ public final class Temporals {
     }
 
     public String dayOfWeekName(final Temporal target) {
-        return TemporalUtils.dayOfWeekName(target, this.locale);
+        return temporalFormattingUtils.dayOfWeekName(target);
     }
 
     public String[] arrayDayOfWeekName(final Object[] target) {
@@ -417,7 +385,7 @@ public final class Temporals {
     }
 
     public String dayOfWeekNameShort(final Temporal target) {
-        return TemporalUtils.dayOfWeekNameShort(target, this.locale);
+        return temporalFormattingUtils.dayOfWeekNameShort(target);
     }
 
     public String[] arrayDayOfWeekNameShort(final Object[] target) {
@@ -448,7 +416,7 @@ public final class Temporals {
     }
 
     public Integer hour(final Temporal target) {
-        return TemporalUtils.hour(target);
+        return temporalFormattingUtils.hour(target);
     }
 
     public Integer[] arrayHour(final Object[] target) {
@@ -479,7 +447,7 @@ public final class Temporals {
     }
 
     public Integer minute(final Temporal target) {
-        return TemporalUtils.minute(target);
+        return temporalFormattingUtils.minute(target);
     }
 
     public Integer[] arrayMinute(final Object[] target) {
@@ -510,7 +478,7 @@ public final class Temporals {
     }
 
     public Integer second(final Temporal target) {
-        return TemporalUtils.second(target);
+        return temporalFormattingUtils.second(target);
     }
 
     public Integer[] arraySecond(final Object[] target) {
@@ -541,7 +509,7 @@ public final class Temporals {
     }
 
     public Integer millisecond(final Temporal target) {
-        return TemporalUtils.millisecond(target);
+        return temporalFormattingUtils.millisecond(target);
     }
 
     public Integer[] arrayMillisecond(final Object[] target) {
@@ -577,7 +545,7 @@ public final class Temporals {
      */
     public String formatISO(final Temporal target) {
         try {
-            return TemporalUtils.formatISO(target);
+            return temporalFormattingUtils.formatISO(target);
         } catch (final Exception e) {
             throw new TemplateProcessingException("Error formatting date as ISO8601", e);
         }

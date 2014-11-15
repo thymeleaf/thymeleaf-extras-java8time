@@ -15,42 +15,36 @@
  */
 package org.thymeleaf.extras.java8time.expression;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.temporal.Temporal;
+import static java.util.Arrays.asList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.TreeSet;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Tests regarding formatting of temporal objects.
  */
-public class TemporalsTest {
+public class TemporalsFormattingTest {
     
-    private final Temporals temporals = new Temporals(Locale.ENGLISH);
+    private final Temporals temporals = new Temporals(Locale.ENGLISH, ZoneOffset.UTC);
 
     @Test
-    public void testFormat_Temporal() {
-
-        Temporal target = null;
-
-        String expResult = "";
-        String result = temporals.format(target);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+    public void testFormat() {
+        Temporal time = ZonedDateTime.of(2015, 12, 31, 23, 59, 45, 0, ZoneOffset.UTC);
+        assertEquals("December 31, 2015 11:59:45 PM Z", temporals.format(time));
     }
 
-    @Test
-    public void testArrayFormat_ObjectArr() {
-
-        Object[] target = null;
-
-        String[] expResult = null;
-        String[] result = temporals.arrayFormat(target);
-        assertArrayEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
+    /*
     @Test
     public void testListFormat_List() {
 
@@ -72,55 +66,17 @@ public class TemporalsTest {
         assertEquals(expResult, result);
         fail("The test case is a prototype.");
     }
-
+    */
+    
     @Test
-    public void testFormat_Temporal_String() {
-
-        Temporal target = null;
-        String pattern = "";
-
-        String expResult = "";
-        String result = temporals.format(target, pattern);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+    public void testFormatWithPattern() {
+        Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        String expectd = "2015-12-31 23:59:00";
+        assertEquals(expectd, temporals.format(time, pattern));
     }
 
-    @Test
-    public void testArrayFormat_ObjectArr_String() {
-
-        Object[] target = null;
-        String pattern = "";
-
-        String[] expResult = null;
-        String[] result = temporals.arrayFormat(target, pattern);
-        assertArrayEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testListFormat_List_String() {
-
-        List<? extends Temporal> target = null;
-        String pattern = "";
-
-        List<String> expResult = null;
-        List<String> result = temporals.listFormat(target, pattern);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testSetFormat_Set_String() {
-
-        Set<? extends Temporal> target = null;
-        String pattern = "";
-
-        Set<String> expResult = null;
-        Set<String> result = temporals.setFormat(target, pattern);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
+    /*
     @Test
     public void testDay() {
 
@@ -692,5 +648,5 @@ public class TemporalsTest {
         assertEquals(expResult, result);
         fail("The test case is a prototype.");
     }
-    
+    */
 }

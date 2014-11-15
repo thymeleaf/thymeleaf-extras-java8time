@@ -32,27 +32,31 @@ import org.thymeleaf.util.Validate;
  * Instance implementations of Temporal ({@link java.time.Temporal}) according to different sets
  * of parameters.
  *
- * @since 1.0
+ * @since 2.1.4
  */
 public final class TemporalCreationUtils {
 
     public static final int ONE_MILLION = 1_000_000;
 
+    public TemporalCreationUtils() {
+        super();
+    }
+    
     /**
      *
      * @return a instance of java.time.LocalDate
-     * @since 2.1.3
+     * @since 2.1.4
      */
-    public static Temporal create(final Object year, final Object month, final Object day) {
+    public Temporal create(final Object year, final Object month, final Object day) {
         return LocalDate.of(integer(year), integer(month), integer(day));
     }
 
     /**
      *
      * @return a instance of java.time.LocalDateTime
-     * @since 2.1.3
+     * @since 2.1.4
      */
-    public static Temporal create(final Object year, final Object month, final Object day,
+    public Temporal create(final Object year, final Object month, final Object day,
             final Object hour, final Object minute) {
         return LocalDateTime.of(integer(year), integer(month), integer(day), integer(hour), integer(minute));
     }
@@ -60,9 +64,9 @@ public final class TemporalCreationUtils {
     /**
      *
      * @return a instance of java.time.LocalDateTime
-     * @since 2.1.3
+     * @since 2.1.4
      */
-    public static Temporal create(final Object year, final Object month, final Object day,
+    public Temporal create(final Object year, final Object month, final Object day,
             final Object hour, final Object minute, final Object second) {
         return LocalDateTime.of(integer(year), integer(month), integer(day),
             integer(hour), integer(minute), integer(second));
@@ -71,9 +75,9 @@ public final class TemporalCreationUtils {
     /**
      *
      * @return a instance of java.time.LocalDateTime
-     * @since 2.1.3
+     * @since 2.1.4
      */
-    public static Temporal create(final Object year, final Object month, final Object day,
+    public Temporal create(final Object year, final Object month, final Object day,
             final Object hour, final Object minute, final Object second, final Object millisecond) {
         final int nanoSecond = integer(millisecond) * ONE_MILLION;
         return LocalDateTime.of(integer(year), integer(month), integer(day),
@@ -83,9 +87,9 @@ public final class TemporalCreationUtils {
     /**
      *
      * @return a instance of java.time.LocalDateTime
-     * @since 2.1.3
+     * @since 2.1.4
      */
-    public static Temporal createNow() {
+    public Temporal createNow() {
         return LocalDateTime.now();
     }
 
@@ -94,16 +98,16 @@ public final class TemporalCreationUtils {
      * @return a instance of java.time.ZonedDateTime
      * @since 2.1.0
      */
-    public static Temporal createNowForTimeZone(final Object zoneId) {
+    public Temporal createNowForTimeZone(final Object zoneId) {
         return ZonedDateTime.now(zoneId(zoneId));
     }
 
     /**
      *
      * @return a instance of java.time.LocalDate
-     * @since 2.1.3
+     * @since 2.1.4
      */
-    public static Temporal createToday() {
+    public Temporal createToday() {
         return LocalDate.now();
     }
 
@@ -112,17 +116,17 @@ public final class TemporalCreationUtils {
      * @return a instance of java.time.ZonedDateTime with 00:00:00.000 for the time part
      * @since 2.1.0
      */
-    public static Temporal createTodayForTimeZone(final Object zoneId) {
+    public Temporal createTodayForTimeZone(final Object zoneId) {
         return ZonedDateTime.now(zoneId(zoneId))
             .withHour(0).withMinute(0).withSecond(0).withNano(0);
     }
 
-    private static int integer(final Object number) {
+    private int integer(final Object number) {
         Validate.notNull(number, "Argument cannot be null");
         return EvaluationUtil.evaluateAsNumber(number).intValue();
     }
 
-    private static ZoneId zoneId(final Object zoneId) {
+    private ZoneId zoneId(final Object zoneId) {
         Validate.notNull(zoneId, "ZoneId cannot be null");
         if (zoneId instanceof ZoneId) {
             return (ZoneId) zoneId;
