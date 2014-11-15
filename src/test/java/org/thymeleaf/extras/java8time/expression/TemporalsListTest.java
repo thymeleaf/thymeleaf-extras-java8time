@@ -18,6 +18,7 @@ package org.thymeleaf.extras.java8time.expression;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.temporal.Temporal;
+import java.util.Arrays;
 import static java.util.Arrays.asList;
 import java.util.List;
 import java.util.Locale;
@@ -46,4 +47,11 @@ public class TemporalsListTest {
         assertEquals(expected, temporals.listFormat(list, pattern));
     }
 
+    @Test
+    public void testListDay() {
+        List<Temporal> list = asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31));
+        List<Integer> expected = asList(1, 31);
+        assertEquals(expected, temporals.listDay(list));
+    }
+    
 }

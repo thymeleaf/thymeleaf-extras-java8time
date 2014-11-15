@@ -44,4 +44,11 @@ public class TemporalsArrayTest {
         assertArrayEquals(expected, temporals.arrayFormat(array, pattern));
     }
 
+    @Test
+    public void testArrayDay() {
+        Temporal[] array = {LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)};
+        Integer[] expected = {1, 31};
+        assertArrayEquals(expected, temporals.arrayDay(array));
+    }
+
 }

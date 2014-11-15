@@ -47,4 +47,10 @@ public class TemporalsSetTest {
         assertEquals(expected, temporals.setFormat(set, pattern));
     }
 
+    @Test
+    public void testSetDay() {
+        Set<Temporal> set = new TreeSet<>(asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)));
+        Set<Integer> expected = new TreeSet<>(asList(1, 31));
+        assertEquals(expected, temporals.setDay(set));
+    }
 }

@@ -15,6 +15,7 @@
  */
 package org.thymeleaf.extras.java8time.expression;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -44,51 +45,13 @@ public class TemporalsFormattingTest {
         assertEquals(expectd, temporals.format(time, pattern));
     }
 
-    /*
     @Test
     public void testDay() {
-
-        Temporal target = null;
-
-        Integer expResult = null;
-        Integer result = temporals.day(target);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        Temporal time = LocalDate.of(2015, 12, 31);
+        assertEquals(31, temporals.day(time).intValue());
     }
 
-    @Test
-    public void testArrayDay() {
-
-        Object[] target = null;
-
-        Integer[] expResult = null;
-        Integer[] result = temporals.arrayDay(target);
-        assertArrayEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testListDay() {
-
-        List<? extends Temporal> target = null;
-
-        List<Integer> expResult = null;
-        List<Integer> result = temporals.listDay(target);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testSetDay() {
-
-        Set<? extends Temporal> target = null;
-
-        Set<Integer> expResult = null;
-        Set<Integer> result = temporals.setDay(target);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
+    /*
     @Test
     public void testMonth() {
 
