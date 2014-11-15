@@ -63,4 +63,11 @@ public final class TemporalListUtils {
             .map(time -> temporalFormattingUtils.day(time))
             .collect(toList());
     }
+    
+    public List<Integer> listMonth(final List<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.month(time))
+            .collect(toList());
+    }
 }

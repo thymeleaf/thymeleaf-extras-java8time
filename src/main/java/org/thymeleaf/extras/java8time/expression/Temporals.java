@@ -190,43 +190,28 @@ public final class Temporals {
     public Set<Integer> setDay(final Set<? extends Temporal> target) {
         return temporalSetUtils.setDay(target);
     }
+    
+    public Integer month(final Temporal target) {
+        return temporalFormattingUtils.month(target);
+    }
+
+    public Integer[] arrayMonth(final Object[] target) {
+        return temporalArrayUtils.arrayMonth(target);
+    }
+
+    public List<Integer> listMonth(final List<? extends Temporal> target) {
+        return temporalListUtils.listMonth(target);
+    }
+
+    public Set<Integer> setMonth(final Set<? extends Temporal> target) {
+        return temporalSetUtils.setMonth(target);
+    }
 
     /***********************************************************************************************/ 
     /***********************************************************************************************/ 
     /***********************************************************************************************/ 
     /***********************************************************************************************/ 
    
-    public Integer month(final Temporal target) {
-        return temporalFormattingUtils.month(target);
-    }
-
-    public Integer[] arrayMonth(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = month((Temporal) target[i]);
-        }
-        return result;
-    }
-
-    public List<Integer> listMonth(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<Integer> result = new ArrayList<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(month(element));
-        }
-        return result;
-    }
-
-    public Set<Integer> setMonth(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<Integer> result = new LinkedHashSet<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(month(element));
-        }
-        return result;
-    }
-
     public String monthName(final Temporal target) {
         return temporalFormattingUtils.monthName(target);
     }

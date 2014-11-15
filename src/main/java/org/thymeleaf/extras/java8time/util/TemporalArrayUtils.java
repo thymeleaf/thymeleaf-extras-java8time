@@ -67,4 +67,13 @@ public final class TemporalArrayUtils {
         }
         return result;
     }
+
+    public Integer[] arrayMonth(final Object[] target) {
+        Validate.notNull(target, "Target cannot be null");
+        final Integer[] result = new Integer[target.length];
+        for (int i = 0; i < target.length; i++) {
+            result[i] = temporalFormattingUtils.month((Temporal) target[i]);
+        }
+        return result;
+    }
 }

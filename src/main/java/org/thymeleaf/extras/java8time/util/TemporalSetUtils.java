@@ -64,4 +64,11 @@ public final class TemporalSetUtils {
             .map(time -> temporalFormattingUtils.day(time))
             .collect(toSet());
     }
+
+    public Set<Integer> setMonth(final Set<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.month(time))
+            .collect(toSet());
+    }
 }
