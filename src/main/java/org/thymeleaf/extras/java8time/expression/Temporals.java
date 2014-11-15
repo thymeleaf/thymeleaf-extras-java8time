@@ -48,7 +48,6 @@ import org.thymeleaf.util.Validate;
  */
 public final class Temporals {
 
-    private final Locale locale;
     private final TemporalCreationUtils temporalCreationUtils;
     private final TemporalFormattingUtils temporalFormattingUtils;
     private final TemporalArrayUtils temporalArrayUtils;
@@ -62,7 +61,6 @@ public final class Temporals {
     public Temporals(final Locale locale, final ZoneId defaultZoneId) {
         super();
         Validate.notNull(locale, "Locale cannot be null");
-        this.locale = locale;
         this.temporalCreationUtils = new TemporalCreationUtils();
         this.temporalFormattingUtils = new TemporalFormattingUtils(locale, defaultZoneId);
         this.temporalArrayUtils = new TemporalArrayUtils(locale, defaultZoneId);

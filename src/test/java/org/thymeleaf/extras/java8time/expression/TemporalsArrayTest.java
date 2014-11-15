@@ -50,5 +50,12 @@ public class TemporalsArrayTest {
         Integer[] expected = {1, 31};
         assertArrayEquals(expected, temporals.arrayDay(array));
     }
+    
+    @Test
+    public void testArrayMonth() {
+        Temporal[] array = {LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)};
+        Integer[] expected = {1, 12};
+        assertArrayEquals(expected, temporals.arrayMonth(array));
+    }
 
 }

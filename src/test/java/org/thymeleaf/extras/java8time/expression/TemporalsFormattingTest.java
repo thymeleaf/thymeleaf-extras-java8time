@@ -51,51 +51,13 @@ public class TemporalsFormattingTest {
         assertEquals(31, temporals.day(time).intValue());
     }
 
-    /*
     @Test
     public void testMonth() {
-
-        Temporal target = null;
-
-        Integer expResult = null;
-        Integer result = temporals.month(target);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        Temporal time = LocalDate.of(2015, 12, 31);
+        assertEquals(12, temporals.month(time).intValue());
     }
 
-    @Test
-    public void testArrayMonth() {
-
-        Object[] target = null;
-
-        Integer[] expResult = null;
-        Integer[] result = temporals.arrayMonth(target);
-        assertArrayEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testListMonth() {
-
-        List<? extends Temporal> target = null;
-
-        List<Integer> expResult = null;
-        List<Integer> result = temporals.listMonth(target);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testSetMonth() {
-
-        Set<? extends Temporal> target = null;
-
-        Set<Integer> expResult = null;
-        Set<Integer> result = temporals.setMonth(target);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
+    /*
     @Test
     public void testMonthName() {
 

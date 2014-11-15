@@ -54,4 +54,11 @@ public class TemporalsListTest {
         assertEquals(expected, temporals.listDay(list));
     }
     
+    @Test
+    public void testListMonth() {
+        List<Temporal> list = asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31));
+        List<Integer> expected = asList(1, 12);
+        assertEquals(expected, temporals.listMonth(list));
+    }
+    
 }
