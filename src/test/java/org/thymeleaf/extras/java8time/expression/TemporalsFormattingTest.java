@@ -15,19 +15,11 @@
  */
 package org.thymeleaf.extras.java8time.expression;
 
-import java.text.DateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.temporal.Temporal;
-import static java.util.Arrays.asList;
-import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import java.util.Set;
-import java.util.TreeSet;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -44,30 +36,6 @@ public class TemporalsFormattingTest {
         assertEquals("December 31, 2015 11:59:45 PM Z", temporals.format(time));
     }
 
-    /*
-    @Test
-    public void testListFormat_List() {
-
-        List<? extends Temporal> target = null;
-
-        List<String> expResult = null;
-        List<String> result = temporals.listFormat(target);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testSetFormat_Set() {
-
-        Set<? extends Temporal> target = null;
-
-        Set<String> expResult = null;
-        Set<String> result = temporals.setFormat(target);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-    */
-    
     @Test
     public void testFormatWithPattern() {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);

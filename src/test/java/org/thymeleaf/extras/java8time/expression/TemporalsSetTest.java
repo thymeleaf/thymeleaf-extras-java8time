@@ -15,16 +15,10 @@
  */
 package org.thymeleaf.extras.java8time.expression;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.time.temporal.Temporal;
 import static java.util.Arrays.asList;
-import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
@@ -36,7 +30,14 @@ import static org.junit.Assert.*;
  */
 public class TemporalsSetTest {
     
-    private final Temporals temporals = new Temporals(Locale.ENGLISH);
+    private final Temporals temporals = new Temporals(Locale.ENGLISH, ZoneOffset.UTC);
+
+    @Test
+    public void testSetFormat() {
+        Set<Temporal> set = new TreeSet<>(asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)));
+        Set<String> expected = new TreeSet<>(asList("January 1, 2015 12:00:00 AM Z", "December 31, 2015 12:00:00 AM Z"));
+        assertEquals(expected, temporals.setFormat(set));
+    }
 
     @Test
     public void testSetFormatWithPattern() {
