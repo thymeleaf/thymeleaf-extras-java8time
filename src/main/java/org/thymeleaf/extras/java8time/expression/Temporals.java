@@ -21,13 +21,10 @@ package org.thymeleaf.extras.java8time.expression;
 
 import java.time.ZoneId;
 import java.time.temporal.Temporal;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import org.thymeleaf.exceptions.TemplateProcessingException;
 import org.thymeleaf.extras.java8time.util.TemporalArrayUtils;
 import org.thymeleaf.extras.java8time.util.TemporalCreationUtils;
 import org.thymeleaf.extras.java8time.util.TemporalFormattingUtils;
@@ -103,8 +100,8 @@ public final class Temporals {
      * @since 2.1.4
      */
     public Temporal create(final Object year, final Object month, final Object day,
-        final Object hour, final Object minute, final Object second, final Object millisecond) {
-        return temporalCreationUtils.create(year, month, day, hour, minute, second, millisecond);
+        final Object hour, final Object minute, final Object second, final Object nanosecond) {
+        return temporalCreationUtils.create(year, month, day, hour, minute, second, nanosecond);
     }
 
     /**
@@ -143,383 +140,452 @@ public final class Temporals {
         return temporalCreationUtils.createTodayForTimeZone(zoneId);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public String format(final Temporal target) {
         return temporalFormattingUtils.format(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public String[] arrayFormat(final Object[] target) {
         return temporalArrayUtils.arrayFormat(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public List<String> listFormat(final List<? extends Temporal> target) {
         return temporalListUtils.listFormat(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Set<String> setFormat(final Set<? extends Temporal> target) {
         return temporalSetUtils.setFormat(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public String format(final Temporal target, final String pattern) {
         return temporalFormattingUtils.format(target, pattern);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public String[] arrayFormat(final Object[] target, final String pattern) {
         return temporalArrayUtils.arrayFormat(target, pattern);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public List<String> listFormat(final List<? extends Temporal> target, final String pattern) {
         return temporalListUtils.listFormat(target, pattern);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Set<String> setFormat(final Set<? extends Temporal> target, final String pattern) {
         return temporalSetUtils.setFormat(target, pattern);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer day(final Temporal target) {
         return temporalFormattingUtils.day(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer[] arrayDay(final Object[] target) {
         return temporalArrayUtils.arrayDay(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public List<Integer> listDay(final List<? extends Temporal> target) {
         return temporalListUtils.listDay(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Set<Integer> setDay(final Set<? extends Temporal> target) {
         return temporalSetUtils.setDay(target);
     }
-    
+
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer month(final Temporal target) {
         return temporalFormattingUtils.month(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer[] arrayMonth(final Object[] target) {
         return temporalArrayUtils.arrayMonth(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public List<Integer> listMonth(final List<? extends Temporal> target) {
         return temporalListUtils.listMonth(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Set<Integer> setMonth(final Set<? extends Temporal> target) {
         return temporalSetUtils.setMonth(target);
     }
 
-    /***********************************************************************************************/ 
-    /***********************************************************************************************/ 
-    /***********************************************************************************************/ 
-    /***********************************************************************************************/ 
-   
+    /**
+     *
+     * @since 2.1.4
+     */
     public String monthName(final Temporal target) {
         return temporalFormattingUtils.monthName(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public String[] arrayMonthName(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = monthName((Temporal) target[i]);
-        }
-        return result;
+        return temporalArrayUtils.arrayMonthName(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public List<String> listMonthName(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<String> result = new ArrayList<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(monthName(element));
-        }
-        return result;
+        return temporalListUtils.listMonthName(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Set<String> setMonthName(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<String> result = new LinkedHashSet<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(monthName(element));
-        }
-        return result;
+        return temporalSetUtils.setMonthName(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public String monthNameShort(final Temporal target) {
         return temporalFormattingUtils.monthNameShort(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public String[] arrayMonthNameShort(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = monthNameShort((Temporal) target[i]);
-        }
-        return result;
+        return temporalArrayUtils.arrayMonthNameShort(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public List<String> listMonthNameShort(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<String> result = new ArrayList<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(monthNameShort(element));
-        }
-        return result;
+        return temporalListUtils.listMonthNameShort(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Set<String> setMonthNameShort(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<String> result = new LinkedHashSet<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(monthNameShort(element));
-        }
-        return result;
+        return temporalSetUtils.setMonthNameShort(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer year(final Temporal target) {
         return temporalFormattingUtils.year(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer[] arrayYear(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = year((Temporal) target[i]);
-        }
-        return result;
+        return temporalArrayUtils.arrayYear(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public List<Integer> listYear(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<Integer> result = new ArrayList<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(year(element));
-        }
-        return result;
+        return temporalListUtils.listYear(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Set<Integer> setYear(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<Integer> result = new LinkedHashSet<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(year(element));
-        }
-        return result;
+        return temporalSetUtils.setYear(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer dayOfWeek(final Temporal target) {
         return temporalFormattingUtils.dayOfWeek(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer[] arrayDayOfWeek(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = dayOfWeek((Temporal) target[i]);
-        }
-        return result;
+        return temporalArrayUtils.arrayDayOfWeek(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public List<Integer> listDayOfWeek(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<Integer> result = new ArrayList<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(dayOfWeek(element));
-        }
-        return result;
+        return temporalListUtils.listDayOfWeek(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Set<Integer> setDayOfWeek(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<Integer> result = new LinkedHashSet<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(dayOfWeek(element));
-        }
-        return result;
+        return temporalSetUtils.setDayOfWeek(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public String dayOfWeekName(final Temporal target) {
         return temporalFormattingUtils.dayOfWeekName(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public String[] arrayDayOfWeekName(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = dayOfWeekName((Temporal) target[i]);
-        }
-        return result;
+        return temporalArrayUtils.arrayDayOfWeekName(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public List<String> listDayOfWeekName(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<String> result = new ArrayList<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(dayOfWeekName(element));
-        }
-        return result;
+        return temporalListUtils.listDayOfWeekName(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Set<String> setDayOfWeekName(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<String> result = new LinkedHashSet<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(dayOfWeekName(element));
-        }
-        return result;
+        return temporalSetUtils.setDayOfWeekName(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public String dayOfWeekNameShort(final Temporal target) {
         return temporalFormattingUtils.dayOfWeekNameShort(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public String[] arrayDayOfWeekNameShort(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = dayOfWeekNameShort((Temporal) target[i]);
-        }
-        return result;
+        return temporalArrayUtils.arrayDayOfWeekNameShort(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public List<String> listDayOfWeekNameShort(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<String> result = new ArrayList<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(dayOfWeekNameShort(element));
-        }
-        return result;
+        return temporalListUtils.listDayOfWeekNameShort(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Set<String> setDayOfWeekNameShort(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<String> result = new LinkedHashSet<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(dayOfWeekNameShort(element));
-        }
-        return result;
+        return temporalSetUtils.setDayOfWeekNameShort(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer hour(final Temporal target) {
         return temporalFormattingUtils.hour(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer[] arrayHour(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = hour((Temporal) target[i]);
-        }
-        return result;
+        return temporalArrayUtils.arrayHour(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public List<Integer> listHour(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<Integer> result = new ArrayList<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(hour(element));
-        }
-        return result;
+        return temporalListUtils.listHour(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Set<Integer> setHour(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<Integer> result = new LinkedHashSet<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(hour(element));
-        }
-        return result;
+        return temporalSetUtils.setHour(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer minute(final Temporal target) {
         return temporalFormattingUtils.minute(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer[] arrayMinute(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = minute((Temporal) target[i]);
-        }
-        return result;
+        return temporalArrayUtils.arrayMinute(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public List<Integer> listMinute(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<Integer> result = new ArrayList<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(minute(element));
-        }
-        return result;
+        return temporalListUtils.listMinute(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Set<Integer> setMinute(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<Integer> result = new LinkedHashSet<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(minute(element));
-        }
-        return result;
+        return temporalSetUtils.setMinute(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer second(final Temporal target) {
         return temporalFormattingUtils.second(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Integer[] arraySecond(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = second((Temporal) target[i]);
-        }
-        return result;
+        return temporalArrayUtils.arraySecond(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public List<Integer> listSecond(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<Integer> result = new ArrayList<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(second(element));
-        }
-        return result;
+        return temporalListUtils.listSecond(target);
     }
 
+    /**
+     *
+     * @since 2.1.4
+     */
     public Set<Integer> setSecond(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<Integer> result = new LinkedHashSet<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(second(element));
-        }
-        return result;
+        return temporalSetUtils.setSecond(target);
     }
 
-    public Integer millisecond(final Temporal target) {
-        return temporalFormattingUtils.millisecond(target);
+    /**
+     *
+     * @since 2.1.4
+     */
+    public Integer nanosecond(final Temporal target) {
+        return temporalFormattingUtils.nanosecond(target);
     }
 
-    public Integer[] arrayMillisecond(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = millisecond((Temporal) target[i]);
-        }
-        return result;
+    /**
+     *
+     * @since 2.1.4
+     */
+    public Integer[] arrayNanosecond(final Object[] target) {
+        return temporalArrayUtils.arrayNanosecond(target);
     }
 
-    public List<Integer> listMillisecond(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<Integer> result = new ArrayList<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(millisecond(element));
-        }
-        return result;
+    /**
+     *
+     * @since 2.1.4
+     */
+    public List<Integer> listNanosecond(final List<? extends Temporal> target) {
+        return temporalListUtils.listNanosecond(target);
     }
 
-    public Set<Integer> setMillisecond(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<Integer> result = new LinkedHashSet<Integer>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(millisecond(element));
-        }
-        return result;
+    /**
+     *
+     * @since 2.1.4
+     */
+    public Set<Integer> setNanosecond(final Set<? extends Temporal> target) {
+        return temporalSetUtils.setNanosecond(target);
     }
 
     /**
@@ -527,11 +593,7 @@ public final class Temporals {
      * @since 2.1.4
      */
     public String formatISO(final Temporal target) {
-        try {
-            return temporalFormattingUtils.formatISO(target);
-        } catch (final Exception e) {
-            throw new TemplateProcessingException("Error formatting date as ISO8601", e);
-        }
+        return temporalFormattingUtils.formatISO(target);
     }
 
     /**
@@ -539,12 +601,7 @@ public final class Temporals {
      * @since 2.1.4
      */
     public String[] arrayFormatISO(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = formatISO((Temporal) target[i]);
-        }
-        return result;
+        return temporalArrayUtils.arrayFormatISO(target);
     }
 
     /**
@@ -552,12 +609,7 @@ public final class Temporals {
      * @since 2.1.4
      */
     public List<String> listFormatISO(final List<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final List<String> result = new ArrayList<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(formatISO(element));
-        }
-        return result;
+        return temporalListUtils.listFormatISO(target);
     }
 
     /**
@@ -565,12 +617,7 @@ public final class Temporals {
      * @since 2.1.4
      */
     public Set<String> setFormatISO(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Set<String> result = new LinkedHashSet<String>(target.size() + 2);
-        for (final Temporal element : target) {
-            result.add(formatISO(element));
-        }
-        return result;
+        return temporalSetUtils.setFormatISO(target);
     }
 
 }

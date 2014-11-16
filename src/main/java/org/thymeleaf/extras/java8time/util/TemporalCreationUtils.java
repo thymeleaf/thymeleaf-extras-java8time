@@ -36,8 +36,6 @@ import org.thymeleaf.util.Validate;
  */
 public final class TemporalCreationUtils {
 
-    public static final int ONE_MILLION = 1_000_000;
-
     public TemporalCreationUtils() {
         super();
     }
@@ -78,10 +76,9 @@ public final class TemporalCreationUtils {
      * @since 2.1.4
      */
     public Temporal create(final Object year, final Object month, final Object day,
-            final Object hour, final Object minute, final Object second, final Object millisecond) {
-        final int nanoSecond = integer(millisecond) * ONE_MILLION;
+            final Object hour, final Object minute, final Object second, final Object nanosecond) {
         return LocalDateTime.of(integer(year), integer(month), integer(day),
-            integer(hour), integer(minute), integer(second), nanoSecond);
+            integer(hour), integer(minute), integer(second), integer(nanosecond));
     }
 
     /**

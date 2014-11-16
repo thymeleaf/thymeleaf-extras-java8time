@@ -23,7 +23,6 @@ import java.time.temporal.Temporal;
 import java.util.Locale;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.thymeleaf.extras.java8time.util.TemporalCreationUtils.ONE_MILLION;
 
 public class TemporalsCreationTest {
 
@@ -36,8 +35,8 @@ public class TemporalsCreationTest {
         assertTrue(temporal instanceof LocalDate);
         LocalDate date = (LocalDate) temporal;
         assertEquals(2015, date.getYear());
-        assertEquals(12, date.getMonthValue());
-        assertEquals(31, date.getDayOfMonth());
+        assertEquals(  12, date.getMonthValue());
+        assertEquals(  31, date.getDayOfMonth());
     }
 
     @Test
@@ -47,12 +46,12 @@ public class TemporalsCreationTest {
         assertTrue(temporal instanceof LocalDateTime);
         LocalDateTime time = (LocalDateTime) temporal;
         assertEquals(2015, time.getYear());
-        assertEquals(12, time.getMonthValue());
-        assertEquals(31, time.getDayOfMonth());
-        assertEquals(23, time.getHour());
-        assertEquals(59, time.getMinute());
-        assertEquals(0, time.getSecond());
-        assertEquals(0, time.getNano());
+        assertEquals(  12, time.getMonthValue());
+        assertEquals(  31, time.getDayOfMonth());
+        assertEquals(  23, time.getHour());
+        assertEquals(  59, time.getMinute());
+        assertEquals(   0, time.getSecond());
+        assertEquals(   0, time.getNano());
     }
 
     @Test
@@ -62,12 +61,12 @@ public class TemporalsCreationTest {
         assertTrue(temporal instanceof LocalDateTime);
         LocalDateTime time = (LocalDateTime) temporal;
         assertEquals(2015, time.getYear());
-        assertEquals(12, time.getMonthValue());
-        assertEquals(31, time.getDayOfMonth());
-        assertEquals(23, time.getHour());
-        assertEquals(59, time.getMinute());
-        assertEquals(45, time.getSecond());
-        assertEquals(0, time.getNano());
+        assertEquals(  12, time.getMonthValue());
+        assertEquals(  31, time.getDayOfMonth());
+        assertEquals(  23, time.getHour());
+        assertEquals(  59, time.getMinute());
+        assertEquals(  45, time.getSecond());
+        assertEquals(   0, time.getNano());
     }
 
     @Test
@@ -77,12 +76,12 @@ public class TemporalsCreationTest {
         assertTrue(temporal instanceof LocalDateTime);
         LocalDateTime time = (LocalDateTime) temporal;
         assertEquals(2015, time.getYear());
-        assertEquals(12, time.getMonthValue());
-        assertEquals(31, time.getDayOfMonth());
-        assertEquals(23, time.getHour());
-        assertEquals(59, time.getMinute());
-        assertEquals(45, time.getSecond());
-        assertEquals(999 * ONE_MILLION, time.getNano());
+        assertEquals(  12, time.getMonthValue());
+        assertEquals(  31, time.getDayOfMonth());
+        assertEquals(  23, time.getHour());
+        assertEquals(  59, time.getMinute());
+        assertEquals(  45, time.getSecond());
+        assertEquals( 999, time.getNano());
     }
 
     @Test

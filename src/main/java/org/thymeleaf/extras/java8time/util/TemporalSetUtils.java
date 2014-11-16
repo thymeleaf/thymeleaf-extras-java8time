@@ -71,4 +71,82 @@ public final class TemporalSetUtils {
             .map(time -> temporalFormattingUtils.month(time))
             .collect(toSet());
     }
+
+    public Set<String> setMonthName(final Set<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.monthName(time))
+            .collect(toSet());
+    }
+
+    public Set<String> setMonthNameShort(final Set<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.monthNameShort(time))
+            .collect(toSet());
+    }
+
+    public Set<Integer> setYear(final Set<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.year(time))
+            .collect(toSet());
+    }
+    
+    public Set<Integer> setDayOfWeek(final Set<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.dayOfWeek(time))
+            .collect(toSet());
+    }
+
+    public Set<String> setDayOfWeekName(final Set<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.dayOfWeekName(time))
+            .collect(toSet());
+    }
+    
+    public Set<String> setDayOfWeekNameShort(final Set<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.dayOfWeekNameShort(time))
+            .collect(toSet());
+    }
+    
+    public Set<Integer> setHour(final Set<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.hour(time))
+            .collect(toSet());
+    }
+    
+    public Set<Integer> setMinute(final Set<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.minute(time))
+            .collect(toSet());
+    }
+    
+    public Set<Integer> setSecond(final Set<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.second(time))
+            .collect(toSet());
+    }
+    
+    public Set<Integer> setNanosecond(final Set<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.nanosecond(time))
+            .collect(toSet());
+    }
+
+    public Set<String> setFormatISO(final Set<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.formatISO(time))
+            .collect(toSet());
+    }
+
 }

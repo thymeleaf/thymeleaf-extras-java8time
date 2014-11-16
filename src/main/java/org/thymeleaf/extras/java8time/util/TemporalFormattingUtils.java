@@ -42,6 +42,8 @@ import org.thymeleaf.util.Validate;
  */
 public final class TemporalFormattingUtils {
 
+    private static final DateTimeFormatter ISO8601_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZZZ");
+    
     private final Locale locale;
     private final ZoneId defaultZoneId;
     
@@ -126,17 +128,16 @@ public final class TemporalFormattingUtils {
         return time.get(ChronoField.SECOND_OF_MINUTE);
     }
 
-    public Integer millisecond(final Object target) {
+    public Integer nanosecond(final Object target) {
         Validate.notNull(target, "Cannot retrieve hour from null");
         final TemporalAccessor time = temporal(target);
-        return time.get(ChronoField.MILLI_OF_SECOND);
+        return time.get(ChronoField.NANO_OF_SECOND);
     }
 
     public String formatISO(final Object target) {
         Validate.notNull(target, "Cannot apply format on null");
         if (target instanceof TemporalAccessor) {
-            // FIXME: check if this is required format
-            return DateTimeFormatter.ISO_OFFSET_DATE_TIME.format((TemporalAccessor) target);
+            return ISO8601_DATE_TIME_FORMATTER.withLocale(locale).format(zonedTime(target));
         } else {
             throw new IllegalArgumentException(
                 "Cannot format object of class \"" + target.getClass().getName() + "\" as a date");

@@ -70,4 +70,82 @@ public final class TemporalListUtils {
             .map(time -> temporalFormattingUtils.month(time))
             .collect(toList());
     }
+
+    public List<String> listMonthName(final List<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.monthName(time))
+            .collect(toList());
+    }
+
+    public List<String> listMonthNameShort(final List<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.monthNameShort(time))
+            .collect(toList());
+    }
+
+    public List<Integer> listYear(final List<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.year(time))
+            .collect(toList());
+    }
+    
+    public List<Integer> listDayOfWeek(final List<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.dayOfWeek(time))
+            .collect(toList());
+    }
+
+    public List<String> listDayOfWeekName(final List<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.dayOfWeekName(time))
+            .collect(toList());
+    }
+    
+    public List<String> listDayOfWeekNameShort(final List<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.dayOfWeekNameShort(time))
+            .collect(toList());
+    }
+    
+    public List<Integer> listHour(final List<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.hour(time))
+            .collect(toList());
+    }
+
+    public List<Integer> listMinute(final List<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.minute(time))
+            .collect(toList());
+    }
+
+    public List<Integer> listSecond(final List<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.second(time))
+            .collect(toList());
+    }
+
+    public List<Integer> listNanosecond(final List<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.nanosecond(time))
+            .collect(toList());
+    }
+
+    public List<String> listFormatISO(final List<? extends Temporal> target) {
+        Validate.notNull(target, "Target cannot be null");
+        return target.stream()
+            .map(time -> temporalFormattingUtils.formatISO(time))
+            .collect(toList());
+    }
+    
 }

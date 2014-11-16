@@ -105,7 +105,7 @@ ${#temporals.dayOfWeekNameShort(temporal)}     // also arrayDayOfWeekNameShort(.
 ${#temporals.hour(temporal)}                   // also arrayHour(...), listHour(...), etc.
 ${#temporals.minute(temporal)}                 // also arrayMinute(...), listMinute(...), etc.
 ${#temporals.second(temporal)}                 // also arraySecond(...), listSecond(...), etc.
-${#temporals.millisecond(temporal)}            // also arrayMillisecond(...), listMillisecond(...), etc.
+${#temporals.nanosecond(temporal)}             // also arrayNanosecond(...), listNanosecond(...), etc.
 
 /*
  * Create temporal (java.time.Temporal) objects from its components
@@ -113,7 +113,7 @@ ${#temporals.millisecond(temporal)}            // also arrayMillisecond(...), li
 ${#temporals.create(year,month,day)}
 ${#temporals.create(year,month,day,hour,minute)}
 ${#temporals.create(year,month,day,hour,minute,second)}
-${#temporals.create(year,month,day,hour,minute,second,millisecond)}
+${#temporals.create(year,month,day,hour,minute,second,nanosecond)}
 
 /*
  * Create a temporal (java.time.Temporal) object for the current date and time
