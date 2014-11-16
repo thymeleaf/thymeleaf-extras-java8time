@@ -34,7 +34,7 @@ import org.thymeleaf.util.Validate;
 
 /**
  * <p>
- * Utility class for performing Java 8 dates ({@link java.time.Temporal}) operations.
+ * Utility class to performJava 8 dates ({@link java.time.Temporal}) operations.
  * </p>
  * <p>
  * An object of this class is usually available in variable evaluation expressions with the name

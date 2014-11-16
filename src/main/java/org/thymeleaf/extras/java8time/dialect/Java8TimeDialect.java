@@ -28,13 +28,14 @@ import org.thymeleaf.dialect.IExpressionEnhancingDialect;
 import org.thymeleaf.extras.java8time.expression.Temporals;
 
 /**
- * Thymeleaf Dialect to format and create Java 8 Time object.
+ * 
+ * Thymeleaf Dialect to format and create Java 8 Time objects.
  * 
  * @since 2.1.4
  */
 public class Java8TimeDialect extends AbstractDialect implements IExpressionEnhancingDialect {
 
-    public static final String TEMPORAL_EVALUATION_VARIABLE_NAME = "temporals";
+    private static final String TEMPORAL_EVALUATION_VARIABLE_NAME = "temporals";
 
     public Java8TimeDialect() {
         super();
