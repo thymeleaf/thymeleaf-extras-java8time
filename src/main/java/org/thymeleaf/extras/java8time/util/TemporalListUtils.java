@@ -30,7 +30,7 @@ import org.thymeleaf.util.Validate;
 /**
  * Formatting utilities for Java 8 Time object lists.
  * 
- * @since 2.1.4
+ * @since 2.1.0
  */
 public final class TemporalListUtils {
     

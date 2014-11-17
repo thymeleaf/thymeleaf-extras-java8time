@@ -32,7 +32,7 @@ import org.thymeleaf.util.Validate;
  * This class instances implementations of Temporal ({@link java.time.Temporal}) according to different sets
  * of parameters.
  *
- * @since 2.1.4
+ * @since 2.1.0
  */
 public final class TemporalCreationUtils {
 
@@ -43,7 +43,7 @@ public final class TemporalCreationUtils {
     /**
      *
      * @return a instance of java.time.LocalDate
-     * @since 2.1.4
+     * @since 2.1.0
      */
     public Temporal create(final Object year, final Object month, final Object day) {
         return LocalDate.of(integer(year), integer(month), integer(day));
@@ -52,7 +52,7 @@ public final class TemporalCreationUtils {
     /**
      *
      * @return a instance of java.time.LocalDateTime
-     * @since 2.1.4
+     * @since 2.1.0
      */
     public Temporal create(final Object year, final Object month, final Object day,
             final Object hour, final Object minute) {
@@ -62,7 +62,7 @@ public final class TemporalCreationUtils {
     /**
      *
      * @return a instance of java.time.LocalDateTime
-     * @since 2.1.4
+     * @since 2.1.0
      */
     public Temporal create(final Object year, final Object month, final Object day,
             final Object hour, final Object minute, final Object second) {
@@ -73,7 +73,7 @@ public final class TemporalCreationUtils {
     /**
      *
      * @return a instance of java.time.LocalDateTime
-     * @since 2.1.4
+     * @since 2.1.0
      */
     public Temporal create(final Object year, final Object month, final Object day,
             final Object hour, final Object minute, final Object second, final Object nanosecond) {
@@ -84,7 +84,7 @@ public final class TemporalCreationUtils {
     /**
      *
      * @return a instance of java.time.LocalDateTime
-     * @since 2.1.4
+     * @since 2.1.0
      */
     public Temporal createNow() {
         return LocalDateTime.now();
@@ -102,7 +102,7 @@ public final class TemporalCreationUtils {
     /**
      *
      * @return a instance of java.time.LocalDate
-     * @since 2.1.4
+     * @since 2.1.0
      */
     public Temporal createToday() {
         return LocalDate.now();
