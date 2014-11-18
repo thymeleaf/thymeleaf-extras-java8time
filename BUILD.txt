@@ -1,8 +1,8 @@
 
- Building thymeleaf-extras-conditionalcomments
- ---------------------------------------------
+ Building thymeleaf-extras-java8time
+ -----------------------------------
  
- To build thymeleaf-extras-conditionalcomments you will need Maven 2. You can
+ To build thymeleaf-extras-java8time you will need Maven 2. You can
  get it at:
  
      http://maven.apache.org
@@ -11,17 +11,17 @@
  
      mvn clean:clean install
      
- And you will get a fresh target/thymeleaf-extras-conditionalcomments-{version}.jar
+ And you will get a fresh target/thymeleaf-extras-java8time-{version}.jar
  file. You will also get it installed in your local repository at:
  
-     $M2_REPO/org/thymeleaf/extras/thymeleaf-extras-conditionalcomments/{version}/thymeleaf-extras-conditionalcomments-{version}.jar
+     $M2_REPO/org/thymeleaf/extras/thymeleaf-extras-java8time/{version}/thymeleaf-extras-java8time-{version}.jar
 
 
 
- Generating Javadoc for thymeleaf-extras-conditionalcomments
- -----------------------------------------------------------
+ Generating Javadoc for thymeleaf-extras-java8time
+ -------------------------------------------------
  
- If you wish to generate the javadoc for thymeleaf-extras-conditionalcomments, 
+ If you wish to generate the javadoc for thymeleaf-extras-java8time,
  execute this from the project root folder:
  
      mvn javadoc:javadoc

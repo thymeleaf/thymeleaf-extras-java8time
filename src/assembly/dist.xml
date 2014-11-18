@@ -12,7 +12,7 @@
   <fileSets>
     <fileSet>
       <directory>${basedir}/target/apidocs/</directory>
-      <outputDirectory>/apidocs/thymeleaf-extras-conditionalcomments/</outputDirectory>
+      <outputDirectory>/apidocs/thymeleaf-extras-java8time/</outputDirectory>
       <includes>
         <include>**/*</include>
       </includes>
@@ -21,9 +21,9 @@
       <directory>${basedir}/target/</directory>
       <outputDirectory>/dist</outputDirectory>
       <includes>
-        <include>thymeleaf-extras-conditionalcomments-${project.version}.jar</include>
-        <include>thymeleaf-extras-conditionalcomments-${project.version}-javadoc.jar</include>
-        <include>thymeleaf-extras-conditionalcomments-${project.version}-sources.jar</include>
+        <include>thymeleaf-extras-java8time-${project.version}.jar</include>
+        <include>thymeleaf-extras-java8time-${project.version}-javadoc.jar</include>
+        <include>thymeleaf-extras-java8time-${project.version}-sources.jar</include>
       </includes>
     </fileSet>
     <fileSet>
@@ -44,7 +44,7 @@
       <unpack>false</unpack>
       <scope>runtime</scope>
       <excludes>
-        <exclude>org.thymeleaf.extras:thymeleaf-extras-conditionalcomments</exclude>
+        <exclude>org.thymeleaf.extras:thymeleaf-extras-java8time</exclude>
         </excludes>
     </dependencySet>
   </dependencySets> 
