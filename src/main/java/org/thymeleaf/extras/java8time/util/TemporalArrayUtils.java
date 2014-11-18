@@ -27,7 +27,9 @@ import org.thymeleaf.util.Validate;
 
 /**
  * Formatting utilities for Java 8 Time object arrays.
- * 
+ *
+ * @author Jos&eacute; Miguel Samper
+ *
  * @since 2.1.0
  */
 public final class TemporalArrayUtils {

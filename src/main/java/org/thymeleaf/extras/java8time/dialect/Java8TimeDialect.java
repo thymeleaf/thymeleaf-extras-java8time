@@ -30,7 +30,9 @@ import org.thymeleaf.extras.java8time.expression.Temporals;
 /**
  * 
  * Thymeleaf Dialect to format and create Java 8 Time objects.
- * 
+ *
+ * @author Jos&eacute; Miguel Samper
+ *
  * @since 2.1.0
  */
 public class Java8TimeDialect extends AbstractDialect implements IExpressionEnhancingDialect {

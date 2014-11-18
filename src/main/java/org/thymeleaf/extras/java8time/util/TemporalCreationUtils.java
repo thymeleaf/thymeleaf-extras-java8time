@@ -29,8 +29,10 @@ import org.thymeleaf.util.EvaluationUtil;
 import org.thymeleaf.util.Validate;
 
 /**
- * This class instances implementations of Temporal ({@link java.time.Temporal}) according to different sets
+ * This class instances implementations of Temporal ({@link Temporal}) according to different sets
  * of parameters.
+ *
+ * @author Jos&eacute; Miguel Samper
  *
  * @since 2.1.0
  */

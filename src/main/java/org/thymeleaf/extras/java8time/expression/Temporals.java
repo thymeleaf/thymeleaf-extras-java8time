@@ -34,12 +34,14 @@ import org.thymeleaf.util.Validate;
 
 /**
  * <p>
- * Utility class to performJava 8 dates ({@link java.time.Temporal}) operations.
+ * Utility class to performJava 8 dates ({@link Temporal}) operations.
  * </p>
  * <p>
  * An object of this class is usually available in variable evaluation expressions with the name
  * <tt>#temporals</tt>.
  * </p>
+ *
+ * @author Jos&eacute; Miguel Samper
  *
  * @since 2.1.0
  */
