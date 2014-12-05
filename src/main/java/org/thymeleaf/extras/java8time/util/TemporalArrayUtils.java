@@ -53,11 +53,7 @@ public final class TemporalArrayUtils {
     public String[] arrayFormat(final Object[] target, final String pattern) {
         return arrayFormat(
             target,
-            new Function<Object, String>() {
-                public String apply(final Object time) {
-                    return temporalFormattingUtils.format(time, pattern);
-                }
-            },
+            time -> temporalFormattingUtils.format(time, pattern),
             String.class
         );
     }
