@@ -21,8 +21,11 @@ package org.thymeleaf.extras.java8time.util;
 
 import java.time.ZoneId;
 import java.time.temporal.Temporal;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.function.Function;
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 import org.thymeleaf.util.Validate;
 
@@ -42,112 +45,78 @@ public final class TemporalSetUtils {
         super();
         Validate.notNull(locale, "Locale cannot be null");
         Validate.notNull(defaultZoneId, "ZoneId cannot be null");
-        this.temporalFormattingUtils = new TemporalFormattingUtils(locale, defaultZoneId);
+        temporalFormattingUtils = new TemporalFormattingUtils(locale, defaultZoneId);
     }
 
     public Set<String> setFormat(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.format(time))
-            .collect(toSet());
+        return setFormat(target, temporalFormattingUtils::format);
     }
 
-    public Set<String> setFormat(final Set<? extends Temporal> target, 
-            final String pattern) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.format(time, pattern))
-            .collect(toSet());
+    public <T extends Temporal> Set<String> setFormat(final Set<T> target, final String pattern) {
+        return setFormat(target, new Function<T, String>() {
+            public String apply(final Temporal time) {
+                return temporalFormattingUtils.format(time, pattern);
+            }
+        });
     }
 
     public Set<Integer> setDay(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.day(time))
-            .collect(toSet());
+        return setFormat(target, temporalFormattingUtils::day);
     }
 
     public Set<Integer> setMonth(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.month(time))
-            .collect(toSet());
+        return setFormat(target, temporalFormattingUtils::month);
     }
 
     public Set<String> setMonthName(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.monthName(time))
-            .collect(toSet());
+        return setFormat(target, temporalFormattingUtils::monthName);
     }
 
     public Set<String> setMonthNameShort(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.monthNameShort(time))
-            .collect(toSet());
+        return setFormat(target, temporalFormattingUtils::monthNameShort);
     }
 
     public Set<Integer> setYear(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.year(time))
-            .collect(toSet());
+        return setFormat(target, temporalFormattingUtils::year);
     }
     
     public Set<Integer> setDayOfWeek(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.dayOfWeek(time))
-            .collect(toSet());
+        return setFormat(target, temporalFormattingUtils::dayOfWeek);
     }
 
     public Set<String> setDayOfWeekName(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.dayOfWeekName(time))
-            .collect(toSet());
+        return setFormat(target, temporalFormattingUtils::dayOfWeekName);
     }
     
     public Set<String> setDayOfWeekNameShort(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.dayOfWeekNameShort(time))
-            .collect(toSet());
+        return setFormat(target, temporalFormattingUtils::dayOfWeekNameShort);
     }
     
     public Set<Integer> setHour(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.hour(time))
-            .collect(toSet());
+        return setFormat(target, temporalFormattingUtils::hour);
     }
     
     public Set<Integer> setMinute(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.minute(time))
-            .collect(toSet());
+        return setFormat(target, temporalFormattingUtils::minute);
     }
     
     public Set<Integer> setSecond(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.second(time))
-            .collect(toSet());
+        return setFormat(target, temporalFormattingUtils::second);
     }
     
     public Set<Integer> setNanosecond(final Set<? extends Temporal> target) {
-        Validate.notNull(target, "Target cannot be null");
-        return target.stream()
-            .map(time -> temporalFormattingUtils.nanosecond(time))
-            .collect(toSet());
+        return setFormat(target, temporalFormattingUtils::nanosecond);
     }
 
     public Set<String> setFormatISO(final Set<? extends Temporal> target) {
+        return setFormat(target, temporalFormattingUtils::formatISO);
+    }
+
+    private <R extends Object, T extends Temporal> Set<R> setFormat(
+            final Set<T> target, final Function<T, R> mapFunction) {
         Validate.notNull(target, "Target cannot be null");
         return target.stream()
-            .map(time -> temporalFormattingUtils.formatISO(time))
+            .map(time -> mapFunction.apply(time))
             .collect(toSet());
     }
 

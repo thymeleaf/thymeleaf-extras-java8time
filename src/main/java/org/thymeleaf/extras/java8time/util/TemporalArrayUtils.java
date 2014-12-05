@@ -19,9 +19,12 @@
  */
 package org.thymeleaf.extras.java8time.util;
 
+import java.lang.reflect.Array;
 import java.time.ZoneId;
 import java.time.temporal.Temporal;
 import java.util.Locale;
+import java.util.function.Function;
+import java.util.stream.Stream;
 import org.thymeleaf.util.Validate;
 
 
@@ -40,142 +43,82 @@ public final class TemporalArrayUtils {
         super();
         Validate.notNull(locale, "Locale cannot be null");
         Validate.notNull(defaultZoneId, "ZoneId cannot be null");
-        this.temporalFormattingUtils = new TemporalFormattingUtils(locale, defaultZoneId);
+        temporalFormattingUtils = new TemporalFormattingUtils(locale, defaultZoneId);
     }
 
     public String[] arrayFormat(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.format((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::format, String.class);
     }
 
     public String[] arrayFormat(final Object[] target, final String pattern) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.format((Temporal) target[i], pattern);
-        }
-        return result;
+        return arrayFormat(
+            target,
+            new Function<Object, String>() {
+                public String apply(final Object time) {
+                    return temporalFormattingUtils.format(time, pattern);
+                }
+            },
+            String.class
+        );
     }
 
     public Integer[] arrayDay(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.day((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::day, Integer.class);
     }
 
     public Integer[] arrayMonth(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.month((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::month, Integer.class);
     }
 
     public String[] arrayMonthName(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.monthName((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::monthName, String.class);
     }
 
     public String[] arrayMonthNameShort(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.monthNameShort((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::monthNameShort, String.class);
     }
     
     public Integer[] arrayYear(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.year((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::year, Integer.class);
     }
     
     public Integer[] arrayDayOfWeek(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.dayOfWeek((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::dayOfWeek, Integer.class);
     }
     
     public String[] arrayDayOfWeekName(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.dayOfWeekName((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::dayOfWeekName, String.class);
     }
 
     public String[] arrayDayOfWeekNameShort(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.dayOfWeekNameShort((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::dayOfWeekNameShort, String.class);
     }
 
     public Integer[] arrayHour(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.hour((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::hour, Integer.class);
     }
 
     public Integer[] arrayMinute(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.minute((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::minute, Integer.class);
     }
 
     public Integer[] arraySecond(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.second((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::second, Integer.class);
     }
 
     public Integer[] arrayNanosecond(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final Integer[] result = new Integer[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.nanosecond((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::nanosecond, Integer.class);
     }
 
     public String[] arrayFormatISO(final Object[] target) {
-        Validate.notNull(target, "Target cannot be null");
-        final String[] result = new String[target.length];
-        for (int i = 0; i < target.length; i++) {
-            result[i] = temporalFormattingUtils.formatISO((Temporal) target[i]);
-        }
-        return result;
+        return arrayFormat(target, temporalFormattingUtils::formatISO, String.class);
     }
 
+    private <R extends Object> R[] arrayFormat(
+            final Object[] target, final Function<Object, R> mapFunction, final Class<R> returnType) {
+        Validate.notNull(target, "Target cannot be null");
+        return Stream.of(target)
+            .map(time -> mapFunction.apply(time))
+            .toArray(length -> (R[]) Array.newInstance(returnType, length));
+    }
 }
