@@ -27,8 +27,7 @@ Requirements
 ------------
 
   *   Java **8**
-  *   Thymeleaf **2.1.3+**
-  *   Attoparser **1.1+** [http://www.attoparser.org]
+  *   Thymeleaf **2.1.4+**
 
 
 Maven info
@@ -51,11 +50,16 @@ Just add the `org.thymeleaf.extras.java8time.dialect.Java8TimeDialect`
 class to the list of dialects in your TemplateEngine implementation, and you will
 have the `#temporals` object available to be used in your templates.
 
+```java
+TemplateEngine templateEngine = new TemplateEngine();
+templateEngine.addDialect(new Java8TimeDialect());
+...
+```
 
 Features
 --------
 
-This module adds a `#temporals` object similar to the `#dates` or `#calendar` ones in
+This module adds a `#temporals` object similar to the `#dates` or `#calendars` ones in
 the Standard Dialect, allowing the formatting and creation of temporal objects from
 Thymeleaf templates.
 
@@ -91,6 +95,15 @@ ${#temporals.listFormat(temporalsList, 'dd/MMM/yyyy HH:mm')}
 ${#temporals.setFormat(temporalsSet, 'dd/MMM/yyyy HH:mm')}
 
 /*
+ * Format date with ISO-8601 format
+ * Also works with arrays, lists or sets
+ */
+${#temporals.formatISO(temporal)}
+${#temporals.arrayFormatISO(temporalsArray)}
+${#temporals.listFormatISO(temporalsList)}
+${#temporals.setFormatISO(temporalsSet)}
+
+/*
  * Obtain date properties
  * Also works with arrays, lists or sets
  */
@@ -110,20 +123,25 @@ ${#temporals.nanosecond(temporal)}             // also arrayNanosecond(...), lis
 /*
  * Create temporal (java.time.Temporal) objects from its components
  */
-${#temporals.create(year,month,day)}
-${#temporals.create(year,month,day,hour,minute)}
-${#temporals.create(year,month,day,hour,minute,second)}
-${#temporals.create(year,month,day,hour,minute,second,nanosecond)}
+${#temporals.create(year,month,day)}                                // return a instance of java.time.LocalDate
+${#temporals.create(year,month,day,hour,minute)}                    // return a instance of java.time.LocalDateTime
+${#temporals.create(year,month,day,hour,minute,second)}             // return a instance of java.time.LocalDateTime
+${#temporals.create(year,month,day,hour,minute,second,nanosecond)}  // return a instance of java.time.LocalDateTime
 
 /*
  * Create a temporal (java.time.Temporal) object for the current date and time
  */
-${#temporals.createNow()}
+${#temporals.createNow()}                      // return a instance of java.time.LocalDateTime
+${#temporals.createNowForTimeZone(zoneId)}     // return a instance of java.time.ZonedDateTime
+${#temporals.createToday()}                    // return a instance of java.time.LocalDate
+${#temporals.createTodayForTimeZone(zoneId)}   // return a instance of java.time.LocalDate
 
 /*
- * Create a temporal (java.time.Temporal) object for the current date (time set to 00:00)
+ * Create a temporal (java.time.Temporal) object for the provided date
  */
-${#temporals.createToday()}
+${#temporals.createDate(isoDate)}              // return a instance of java.time.LocalDate
+${#temporals.createDateTime(isoDate)}          // return a instance of java.time.LocalDateTime
+${#temporals.createDate(isoDate, pattern)}     // return a instance of java.time.LocalDate
+${#temporals.createDateTime(isoDate, pattern)} // return a instance of java.time.LocalDateTime
 
 ```
-
