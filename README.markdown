@@ -27,7 +27,7 @@ Requirements
 ------------
 
   *   Java **8**
-  *   Thymeleaf **2.1.4+**
+  *   Thymeleaf **2.1.3+**
 
 
 Maven info
