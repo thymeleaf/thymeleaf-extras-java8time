@@ -33,7 +33,7 @@ public class TemporalsArrayTest {
     @Test
     public void testArrayFormat() {
         Temporal[] array = {LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)};
-        String[] expected = {"January 1, 2015 12:00:00 AM Z", "December 31, 2015 12:00:00 AM Z"};
+        String[] expected = {"January 1, 2015", "December 31, 2015"};
         assertArrayEquals(expected, temporals.arrayFormat(array));
     }
 

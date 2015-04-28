@@ -1,0 +1,8 @@
+2.1.1
+=====
+- Support for specific formatting of LocalDate, LocalDateTime, ZonedDateTime, Instant, LocalTime,
+  OffsetTime, OffsetDateTime, Year and YearMonth.
+
+2.1.0
+=====
+- First release of the Java 8 Dialect

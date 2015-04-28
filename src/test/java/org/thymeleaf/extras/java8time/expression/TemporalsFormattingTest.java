@@ -17,6 +17,7 @@ package org.thymeleaf.extras.java8time.expression;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.temporal.Temporal;
@@ -36,7 +37,7 @@ public class TemporalsFormattingTest {
         Temporal time = ZonedDateTime.of(2015, 12, 31, 23, 59, 45, 0, ZoneOffset.UTC);
         assertEquals("December 31, 2015 11:59:45 PM Z", temporals.format(time));
     }
-
+    
     @Test
     public void testFormatWithPattern() {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);

@@ -19,19 +19,15 @@
  */
 package org.thymeleaf.extras.java8time.util;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.chrono.ChronoZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.util.Locale;
 import org.thymeleaf.exceptions.TemplateProcessingException;
+import static org.thymeleaf.extras.java8time.util.TemporalObjects.temporal;
+import static org.thymeleaf.extras.java8time.util.TemporalObjects.zonedTime;
 import org.thymeleaf.util.StringUtils;
 import org.thymeleaf.util.Validate;
 
@@ -44,6 +40,7 @@ import org.thymeleaf.util.Validate;
  */
 public final class TemporalFormattingUtils {
 
+    // Even tough Java comes with several patterns for ISO8601, we use the same pattern of Thymeleaf #dates utility.
     private static final DateTimeFormatter ISO8601_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZZZ");
     
     private final Locale locale;
@@ -139,7 +136,8 @@ public final class TemporalFormattingUtils {
     public String formatISO(final Object target) {
         Validate.notNull(target, "Cannot apply format on null");
         if (target instanceof TemporalAccessor) {
-            return ISO8601_DATE_TIME_FORMATTER.withLocale(locale).format(zonedTime(target));
+            ChronoZonedDateTime time = zonedTime(target, defaultZoneId);
+            return ISO8601_DATE_TIME_FORMATTER.withLocale(locale).format(time);
         } else {
             throw new IllegalArgumentException(
                 "Cannot format object of class \"" + target.getClass().getName() + "\" as a date");
@@ -156,9 +154,8 @@ public final class TemporalFormattingUtils {
 
             DateTimeFormatter formatter;
             if (StringUtils.isEmptyOrWhitespace(pattern)) {
-                // This formatter is only compatible with ZonedDateTime, so we have to convert other types.
-                formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG).withLocale(locale);
-                return formatter.format(zonedTime(target));
+                formatter = TemporalObjects.formatterFor(target, locale);
+                return formatter.format(temporal(target));
             } else {
                 formatter = DateTimeFormatter.ofPattern(pattern, locale);
                 return formatter.format(temporal(target));
@@ -169,27 +166,4 @@ public final class TemporalFormattingUtils {
         }
     }
 
-    private ChronoZonedDateTime zonedTime(final Object target) {
-        if (target instanceof ChronoZonedDateTime) {
-            return (ChronoZonedDateTime) target;
-        } else if (target instanceof LocalDateTime) {
-            return ZonedDateTime.of((LocalDateTime) target, defaultZoneId);
-        } else if (target instanceof LocalDate) {
-            return ZonedDateTime.of((LocalDate) target, LocalTime.MIDNIGHT, defaultZoneId);
-        } else if (target instanceof Instant) {
-            return ZonedDateTime.ofInstant((Instant) target, defaultZoneId);
-        } else {
-            throw new IllegalArgumentException(
-                "Cannot format object of class \"" + target.getClass().getName() + "\" as a date");
-        }
-    }
-    
-    private TemporalAccessor temporal(final Object target) {
-        if (target instanceof TemporalAccessor) {
-            return (TemporalAccessor) target;
-        } else {
-            throw new IllegalArgumentException(
-                "Cannot normalize class \"" + target.getClass().getName() + "\" as a date");
-        }
-    }
 }

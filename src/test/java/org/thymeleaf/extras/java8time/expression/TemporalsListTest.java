@@ -35,7 +35,7 @@ public class TemporalsListTest {
     @Test
     public void testListFormat() {
         List<Temporal> list = asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31));
-        List<String> expected = asList("January 1, 2015 12:00:00 AM Z", "December 31, 2015 12:00:00 AM Z");
+        List<String> expected = asList("January 1, 2015", "December 31, 2015");
         assertEquals(expected, temporals.listFormat(list));
     }
 
