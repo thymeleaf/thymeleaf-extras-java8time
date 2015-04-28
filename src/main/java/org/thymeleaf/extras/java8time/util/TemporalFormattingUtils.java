@@ -40,7 +40,7 @@ import org.thymeleaf.util.Validate;
  */
 public final class TemporalFormattingUtils {
 
-    // Even tough Java comes with several patterns for ISO8601, we use the same pattern of Thymeleaf #dates utility.
+    // Even though Java comes with several patterns for ISO8601, we use the same pattern of Thymeleaf #dates utility.
     private static final DateTimeFormatter ISO8601_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZZZ");
     
     private final Locale locale;
