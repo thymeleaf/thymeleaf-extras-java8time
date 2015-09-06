@@ -48,6 +48,14 @@ public class TemporalsListTest {
     }
 
     @Test
+    public void testListFormatWithLocale() {
+        List<Temporal> list = asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31));
+        String pattern = "EEEE, d MMMM, yyyy";
+        List<String> expected = asList("Donnerstag, 1 Januar, 2015", "Donnerstag, 31 Dezember, 2015");
+        assertEquals(expected, temporals.listFormat(list, pattern, new Locale("de")));
+    }
+
+    @Test
     public void testListDay() {
         List<Temporal> list = asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31));
         List<Integer> expected = asList(1, 31);

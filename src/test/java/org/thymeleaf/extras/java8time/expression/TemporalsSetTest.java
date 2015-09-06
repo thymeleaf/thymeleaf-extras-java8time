@@ -50,6 +50,14 @@ public class TemporalsSetTest {
     }
 
     @Test
+    public void testSetFormatWithLocale() {
+        Set<Temporal> set = new TreeSet<>(asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)));
+        String pattern = "EEEE, d MMMM, yyyy";
+        Set<String> expected = new TreeSet<>(asList("Donnerstag, 1 Januar, 2015", "Donnerstag, 31 Dezember, 2015"));
+        assertEquals(expected, temporals.setFormat(set, pattern, new Locale("de")));
+    }
+
+    @Test
     public void testSetDay() {
         Set<Temporal> set = new TreeSet<>(asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)));
         Set<Integer> expected = new TreeSet<>(asList(1, 31));

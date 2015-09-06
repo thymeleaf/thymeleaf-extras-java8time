@@ -51,9 +51,13 @@ public final class TemporalListUtils {
     }
 
     public <T extends Temporal> List<String> listFormat(final List<T> target, final String pattern) {
+        return listFormat(target, pattern, null);
+    }
+
+    public <T extends Temporal> List<String> listFormat(final List<T> target, final String pattern, final Locale locale) {
         return listFormat(target, new Function<T, String>() {
             public String apply(final Temporal time) {
-                return temporalFormattingUtils.format(time, pattern);
+                return temporalFormattingUtils.format(time, pattern, locale);
             }
         });
     }

@@ -42,8 +42,16 @@ public class TemporalsFormattingTest {
     public void testFormatWithPattern() {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);
         String pattern = "yyyy-MM-dd HH:mm:ss";
-        String expectd = "2015-12-31 23:59:00";
-        assertEquals(expectd, temporals.format(time, pattern));
+        String expected = "2015-12-31 23:59:00";
+        assertEquals(expected, temporals.format(time, pattern));
+    }
+
+    @Test
+    public void testFormatWithLocale() {
+        Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);
+        String pattern = "EEEE, d MMMM, yyyy";
+        String expected = "Donnerstag, 31 Dezember, 2015";
+        assertEquals(expected, temporals.format(time, pattern, new Locale("de")));
     }
 
     @Test
