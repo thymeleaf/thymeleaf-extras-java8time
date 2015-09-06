@@ -17,7 +17,6 @@ package org.thymeleaf.extras.java8time.expression;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.temporal.Temporal;
@@ -39,6 +38,12 @@ public class TemporalsFormattingTest {
     }
     
     @Test
+    public void testFormatWithLocale() {
+        Temporal time = ZonedDateTime.of(2015, 12, 31, 23, 59, 45, 0, ZoneOffset.UTC);
+        assertEquals("31. Dezember 2015 23:59:45 Z", temporals.format(time, Locale.GERMAN));
+    }
+
+    @Test
     public void testFormatWithPattern() {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);
         String pattern = "yyyy-MM-dd HH:mm:ss";
@@ -47,11 +52,11 @@ public class TemporalsFormattingTest {
     }
 
     @Test
-    public void testFormatWithLocale() {
+    public void testFormatWithPatternAndLocale() {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);
         String pattern = "EEEE, d MMMM, yyyy";
         String expectd = "Donnerstag, 31 Dezember, 2015";
-        assertEquals(expectd, temporals.format(time, pattern, new Locale("de")));
+        assertEquals(expectd, temporals.format(time, pattern, Locale.GERMAN));
     }
 
     @Test

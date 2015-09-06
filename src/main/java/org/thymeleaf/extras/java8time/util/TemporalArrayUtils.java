@@ -21,7 +21,6 @@ package org.thymeleaf.extras.java8time.util;
 
 import java.lang.reflect.Array;
 import java.time.ZoneId;
-import java.time.temporal.Temporal;
 import java.util.Locale;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -50,16 +49,16 @@ public final class TemporalArrayUtils {
         return arrayFormat(target, temporalFormattingUtils::format, String.class);
     }
 
+    public String[] arrayFormat(final Object[] target, final Locale locale) {
+        return arrayFormat(target, time -> temporalFormattingUtils.format(time, locale), String.class);
+    }
+
     public String[] arrayFormat(final Object[] target, final String pattern) {
-        return arrayFormat(target, pattern, null);
+        return arrayFormat(target, time -> temporalFormattingUtils.format(time, pattern), String.class);
     }
 
     public String[] arrayFormat(final Object[] target, final String pattern, final Locale locale) {
-        return arrayFormat(
-            target,
-            time -> temporalFormattingUtils.format(time, pattern, locale),
-            String.class
-        );
+        return arrayFormat(target, time -> temporalFormattingUtils.format(time, pattern, locale), String.class);
     }
 
     public Integer[] arrayDay(final Object[] target) {

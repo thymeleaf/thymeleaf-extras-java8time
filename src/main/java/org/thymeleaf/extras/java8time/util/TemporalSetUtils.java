@@ -21,11 +21,9 @@ package org.thymeleaf.extras.java8time.util;
 
 import java.time.ZoneId;
 import java.time.temporal.Temporal;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.function.Function;
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 import org.thymeleaf.util.Validate;
 
@@ -52,16 +50,16 @@ public final class TemporalSetUtils {
         return setFormat(target, temporalFormattingUtils::format);
     }
 
+    public <T extends Temporal> Set<String> setFormat(final Set<T> target, final Locale locale) {
+        return setFormat(target, time -> temporalFormattingUtils.format(time, locale));
+    }
+
     public <T extends Temporal> Set<String> setFormat(final Set<T> target, final String pattern) {
-        return setFormat(target, pattern, null);
+        return setFormat(target, time -> temporalFormattingUtils.format(time, pattern));
     }
 
     public <T extends Temporal> Set<String> setFormat(final Set<T> target, final String pattern, final Locale locale) {
-        return setFormat(target, new Function<T, String>() {
-            public String apply(final Temporal time) {
-                return temporalFormattingUtils.format(time, pattern, locale);
-            }
-        });
+        return setFormat(target, time -> temporalFormattingUtils.format(time, pattern, locale));
     }
 
     public Set<Integer> setDay(final Set<? extends Temporal> target) {

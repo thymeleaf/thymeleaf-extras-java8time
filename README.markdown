@@ -86,6 +86,15 @@ ${#temporals.listFormat(temporalsList)}
 ${#temporals.setFormat(temporalsSet)}
 
 /*
+ * Format date with the standard format for the provided locale
+ * Also works with arrays, lists or sets
+ */
+${#temporals.format(temporal, locale)}
+${#temporals.arrayFormat(temporalsArray, locale)}
+${#temporals.listFormat(temporalsList, locale)}
+${#temporals.setFormat(temporalsSet, locale)}
+
+/*
  * Format date with the specified pattern
  * Also works with arrays, lists or sets
  */
@@ -93,6 +102,15 @@ ${#temporals.format(temporal, 'dd/MMM/yyyy HH:mm')}
 ${#temporals.arrayFormat(temporalsArray, 'dd/MMM/yyyy HH:mm')}
 ${#temporals.listFormat(temporalsList, 'dd/MMM/yyyy HH:mm')}
 ${#temporals.setFormat(temporalsSet, 'dd/MMM/yyyy HH:mm')}
+
+/*
+ * Format date with the specified pattern and locale
+ * Also works with arrays, lists or sets
+ */
+${#temporals.format(temporal, 'dd/MMM/yyyy HH:mm', locale)}
+${#temporals.arrayFormat(temporalsArray, 'dd/MMM/yyyy HH:mm', locale)}
+${#temporals.listFormat(temporalsList, 'dd/MMM/yyyy HH:mm', locale)}
+${#temporals.setFormat(temporalsSet, 'dd/MMM/yyyy HH:mm', locale)}
 
 /*
  * Format date with ISO-8601 format

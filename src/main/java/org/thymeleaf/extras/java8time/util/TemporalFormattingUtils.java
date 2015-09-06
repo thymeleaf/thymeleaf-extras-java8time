@@ -59,6 +59,12 @@ public final class TemporalFormattingUtils {
         return formatDate(target);
     }
 
+    public String format(final Object target, final Locale locale) {
+        Validate.notNull(target, "Cannot apply format on null");
+        Validate.notNull(locale, "Locale cannot be null");
+        return formatDate(target, null, locale);
+    }
+
     public String format(final Object target, final String pattern) {
         return format(target, pattern, null);
     }

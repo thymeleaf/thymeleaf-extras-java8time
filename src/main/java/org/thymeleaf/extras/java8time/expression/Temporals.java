@@ -212,6 +212,38 @@ public final class Temporals {
 
     /**
      *
+     * @since 2.1.1
+     */
+    public String format(final Temporal target, final Locale locale) {
+        return temporalFormattingUtils.format(target, locale);
+    }
+
+    /**
+     *
+     * @since 2.1.1
+     */
+    public String[] arrayFormat(final Object[] target, final Locale locale) {
+        return temporalArrayUtils.arrayFormat(target, locale);
+    }
+
+    /**
+     *
+     * @since 2.1.1
+     */
+    public List<String> listFormat(final List<? extends Temporal> target, final Locale locale) {
+        return temporalListUtils.listFormat(target, locale);
+    }
+
+    /**
+     *
+     * @since 2.1.1
+     */
+    public Set<String> setFormat(final Set<? extends Temporal> target, final Locale locale) {
+        return temporalSetUtils.setFormat(target, locale);
+    }
+
+    /**
+     *
      * @since 2.1.0
      */
     public String format(final Temporal target, final String pattern) {
@@ -242,18 +274,34 @@ public final class Temporals {
         return temporalSetUtils.setFormat(target, pattern);
     }
 
+    /**
+     *
+     * @since 2.1.1
+     */
     public String format(final Temporal target, final String pattern, final Locale locale) {
         return temporalFormattingUtils.format(target, pattern, locale);
     }
 
+    /**
+     *
+     * @since 2.1.1
+     */
     public String[] arrayFormat(final Object[] target, final String pattern, final Locale locale) {
         return temporalArrayUtils.arrayFormat(target, pattern, locale);
     }
 
+    /**
+     *
+     * @since 2.1.1
+     */
     public List<String> listFormat(final List<? extends Temporal> target, final String pattern, final Locale locale) {
         return temporalListUtils.listFormat(target, pattern, locale);
     }
 
+    /**
+     *
+     * @since 2.1.1
+     */
     public Set<String> setFormat(final Set<? extends Temporal> target, final String pattern, final Locale locale) {
         return temporalSetUtils.setFormat(target, pattern, locale);
     }

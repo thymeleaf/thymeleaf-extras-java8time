@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.Temporal;
 import static java.util.Arrays.asList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
@@ -42,6 +41,13 @@ public class TemporalsSetTest {
     }
 
     @Test
+    public void testSetFormatWithLocale() {
+        Set<Temporal> set = new TreeSet<>(asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)));
+        Set<String> expected = new TreeSet<>(asList("1. Januar 2015", "31. Dezember 2015"));
+        assertEquals(expected, temporals.setFormat(set, Locale.GERMAN));
+    }
+    
+    @Test
     public void testSetFormatWithPattern() {
         Set<Temporal> set = new TreeSet<>(asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)));
         String pattern = "yyyy-MM-dd";
@@ -50,11 +56,11 @@ public class TemporalsSetTest {
     }
 
     @Test
-    public void testSetFormatWithLocale() {
+    public void testSetFormatWithPatternAndLocale() {
         Set<Temporal> set = new TreeSet<>(asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)));
         String pattern = "EEEE, d MMMM, yyyy";
         Set<String> expected = new TreeSet<>(asList("Donnerstag, 1 Januar, 2015", "Donnerstag, 31 Dezember, 2015"));
-        assertEquals(expected, temporals.setFormat(set, pattern, new Locale("de")));
+        assertEquals(expected, temporals.setFormat(set, pattern, Locale.GERMAN));
     }
 
     @Test

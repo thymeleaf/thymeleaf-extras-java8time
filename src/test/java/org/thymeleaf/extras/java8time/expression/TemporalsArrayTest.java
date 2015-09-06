@@ -38,6 +38,13 @@ public class TemporalsArrayTest {
     }
 
     @Test
+    public void testArrayFormatWithLocale() {
+        Temporal[] array = {LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)};
+        String[] expected = {"1. Januar 2015", "31. Dezember 2015"};
+        assertArrayEquals(expected, temporals.arrayFormat(array, Locale.GERMAN));
+    }
+    
+    @Test
     public void testArrayFormatWithPattern() {
         Temporal[] array = {LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)};
         String pattern = "yyyy-MM-dd";
@@ -46,11 +53,11 @@ public class TemporalsArrayTest {
     }
 
     @Test
-    public void testArrayFormatWithLocale() {
+    public void testArrayFormatWithPatternAndLocale() {
         Temporal[] array = {LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)};
         String pattern = "EEEE, d MMMM, yyyy";
         String[] expected = {"Donnerstag, 1 Januar, 2015", "Donnerstag, 31 Dezember, 2015"};
-        assertArrayEquals(expected, temporals.arrayFormat(array, pattern, new Locale("de")));
+        assertArrayEquals(expected, temporals.arrayFormat(array, pattern, Locale.GERMAN));
     }
 
     @Test

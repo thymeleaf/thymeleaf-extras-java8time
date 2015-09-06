@@ -40,6 +40,13 @@ public class TemporalsListTest {
     }
 
     @Test
+    public void testListFormatWithLocale() {
+        List<Temporal> list = asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31));
+        List<String> expected = asList("1. Januar 2015", "31. Dezember 2015");
+        assertEquals(expected, temporals.listFormat(list, Locale.GERMAN));
+    }
+
+    @Test
     public void testListFormatWithPattern() {
         List<Temporal> list = asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31));
         String pattern = "yyyy-MM-dd";
@@ -48,11 +55,11 @@ public class TemporalsListTest {
     }
 
     @Test
-    public void testListFormatWithLocale() {
+    public void testListFormatWithPatternAndLocale() {
         List<Temporal> list = asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31));
         String pattern = "EEEE, d MMMM, yyyy";
         List<String> expected = asList("Donnerstag, 1 Januar, 2015", "Donnerstag, 31 Dezember, 2015");
-        assertEquals(expected, temporals.listFormat(list, pattern, new Locale("de")));
+        assertEquals(expected, temporals.listFormat(list, pattern, Locale.GERMAN));
     }
 
     @Test
