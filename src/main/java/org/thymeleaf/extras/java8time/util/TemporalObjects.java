@@ -74,7 +74,8 @@ public final class TemporalObjects {
                 .appendLiteral(':')
                 .appendValue(ChronoField.SECOND_OF_MINUTE)
                 .appendLocalizedOffset(TextStyle.FULL)
-                .toFormatter();
+                .toFormatter()
+                .withLocale(locale);
         } else if (target instanceof OffsetDateTime) {
             // FIXME: localise
             return new DateTimeFormatterBuilder()
@@ -90,7 +91,8 @@ public final class TemporalObjects {
                 .appendLiteral(':')
                 .appendValue(ChronoField.SECOND_OF_MINUTE)
                 .appendLocalizedOffset(TextStyle.FULL)
-                .toFormatter();
+                .toFormatter()
+                .withLocale(locale);
         } else if (target instanceof Year) {
             return new DateTimeFormatterBuilder()
                 .appendValue(ChronoField.YEAR)
@@ -101,7 +103,8 @@ public final class TemporalObjects {
                 .appendText(ChronoField.MONTH_OF_YEAR)
                 .appendLiteral(' ')
                 .appendValue(ChronoField.YEAR)
-                .toFormatter();
+                .toFormatter()
+                .withLocale(locale);
         } else {
             throw new IllegalArgumentException(
                 "Cannot format object of class \"" + target.getClass().getName() + "\" as a date");
