@@ -51,10 +51,14 @@ public final class TemporalArrayUtils {
     }
 
     public String[] arrayFormat(final Object[] target, final String pattern) {
+        return arrayFormat(target, pattern, null);
+    }
+
+    public String[] arrayFormat(final Object[] target, final String pattern, final Locale locale) {
         return arrayFormat(
-            target,
-            time -> temporalFormattingUtils.format(time, pattern),
-            String.class
+                target,
+                time -> temporalFormattingUtils.format(time, pattern, locale),
+                String.class
         );
     }
 

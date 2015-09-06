@@ -60,9 +60,13 @@ public final class TemporalFormattingUtils {
     }
 
     public String format(final Object target, final String pattern) {
+        return format(target, pattern, null);
+    }
+
+    public String format(final Object target, final String pattern, final Locale locale) {
         Validate.notNull(target, "Cannot apply format on null");
         Validate.notEmpty(pattern, "Pattern cannot be null or empty");
-        return formatDate(target, pattern);
+        return formatDate(target, pattern, locale);
     }
 
     public Integer day(final Object target) {
@@ -145,24 +149,25 @@ public final class TemporalFormattingUtils {
     }
 
     private String formatDate(final Object target) {
-        return formatDate(target, null);
+        return formatDate(target, null, null);
     }
 
-    private String formatDate(final Object target, final String pattern) {
+    private String formatDate(final Object target, final String pattern, final Locale localeOverride) {
+        Locale formattingLocale = localeOverride != null ? localeOverride : locale;
         try {
             Validate.notNull(target, "Cannot apply format on null");
 
             DateTimeFormatter formatter;
             if (StringUtils.isEmptyOrWhitespace(pattern)) {
-                formatter = TemporalObjects.formatterFor(target, locale);
+                formatter = TemporalObjects.formatterFor(target, formattingLocale);
                 return formatter.format(temporal(target));
             } else {
-                formatter = DateTimeFormatter.ofPattern(pattern, locale);
+                formatter = DateTimeFormatter.ofPattern(pattern, formattingLocale);
                 return formatter.format(temporal(target));
             }
         } catch (final Exception e) {
             throw new TemplateProcessingException(
-                "Error formatting date for locale " + locale, e);
+                "Error formatting date for locale " + formattingLocale, e);
         }
     }
 

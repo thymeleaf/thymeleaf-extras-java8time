@@ -242,6 +242,22 @@ public final class Temporals {
         return temporalSetUtils.setFormat(target, pattern);
     }
 
+    public String format(final Temporal target, final String pattern, final Locale locale) {
+        return temporalFormattingUtils.format(target, pattern, locale);
+    }
+
+    public String[] arrayFormat(final Object[] target, final String pattern, final Locale locale) {
+        return temporalArrayUtils.arrayFormat(target, pattern, locale);
+    }
+
+    public List<String> listFormat(final List<? extends Temporal> target, final String pattern, final Locale locale) {
+        return temporalListUtils.listFormat(target, pattern, locale);
+    }
+
+    public Set<String> setFormat(final Set<? extends Temporal> target, final String pattern, final Locale locale) {
+        return temporalSetUtils.setFormat(target, pattern, locale);
+    }
+
     /**
      *
      * @since 2.1.0

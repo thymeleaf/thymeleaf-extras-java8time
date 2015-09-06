@@ -53,9 +53,13 @@ public final class TemporalSetUtils {
     }
 
     public <T extends Temporal> Set<String> setFormat(final Set<T> target, final String pattern) {
+        return setFormat(target, pattern, null);
+    }
+
+    public <T extends Temporal> Set<String> setFormat(final Set<T> target, final String pattern, final Locale locale) {
         return setFormat(target, new Function<T, String>() {
             public String apply(final Temporal time) {
-                return temporalFormattingUtils.format(time, pattern);
+                return temporalFormattingUtils.format(time, pattern, locale);
             }
         });
     }
