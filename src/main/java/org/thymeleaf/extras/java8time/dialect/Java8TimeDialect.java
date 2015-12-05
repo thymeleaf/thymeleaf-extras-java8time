@@ -19,18 +19,12 @@
  */
 package org.thymeleaf.extras.java8time.dialect;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import org.thymeleaf.context.IExpressionContext;
 import org.thymeleaf.dialect.AbstractDialect;
 import org.thymeleaf.dialect.IExpressionObjectDialect;
 import org.thymeleaf.expression.IExpressionObjectFactory;
-import org.thymeleaf.extras.java8time.expression.Temporals;
 
 /**
- * 
+ *
  * Thymeleaf Dialect to format and create Java 8 Time objects.
  *
  * @author Jos&eacute; Miguel Samper
@@ -40,43 +34,15 @@ import org.thymeleaf.extras.java8time.expression.Temporals;
  */
 public class Java8TimeDialect extends AbstractDialect implements IExpressionObjectDialect {
 
-		private final IExpressionObjectFactory JAVA8_TIME_EXPRESSION_OBJECTS_FACTORY = new Java8TimeExpressionFactory();
-    
+    private final IExpressionObjectFactory JAVA8_TIME_EXPRESSION_OBJECTS_FACTORY = new Java8TimeExpressionFactory();
+
     public Java8TimeDialect() {
         super("java8time");
     }
 
-		@Override
-		public IExpressionObjectFactory getExpressionObjectFactory() {
-			return JAVA8_TIME_EXPRESSION_OBJECTS_FACTORY;
-		}
+    @Override
+    public IExpressionObjectFactory getExpressionObjectFactory() {
+        return JAVA8_TIME_EXPRESSION_OBJECTS_FACTORY;
+    }
 
-		private static class Java8TimeExpressionFactory implements IExpressionObjectFactory {
-			
-			private static final String TEMPORAL_EVALUATION_VARIABLE_NAME = "temporals";
-
-			private static final Set<String> ALL_EXPRESSION_OBJECT_NAMES =
-          Collections.unmodifiableSet(new LinkedHashSet<String>(java.util.Arrays.asList(
-                  new String[]{
-                          TEMPORAL_EVALUATION_VARIABLE_NAME})));
-			
-			@Override
-			public Set<String> getAllExpressionObjectNames() {
-				return ALL_EXPRESSION_OBJECT_NAMES;
-			}
-
-			@Override
-			public Object buildObject(IExpressionContext context, String expressionObjectName) {
-				if (TEMPORAL_EVALUATION_VARIABLE_NAME.equals(expressionObjectName)) {
-					return new Temporals(context.getLocale());
-				}
-				return null;
-			}
-
-			@Override
-			public boolean isCacheable(String expressionObjectName) {
-				 return (expressionObjectName != null && TEMPORAL_EVALUATION_VARIABLE_NAME.equals(expressionObjectName));
-			}
-			
-		}
 }
