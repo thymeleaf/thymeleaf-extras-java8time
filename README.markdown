@@ -13,6 +13,7 @@ Thymeleaf team.
 
 Current versions: 
 
+  * **Version 3.0.0.RELEASE** - for Thymeleaf 3.0
   * **Version 2.1.0.RELEASE** - for Thymeleaf 2.1 (requires 2.1.3+)
 
 
