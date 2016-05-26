@@ -13,8 +13,8 @@ Thymeleaf team.
 
 Current versions: 
 
-  * **Version 3.0.0.RELEASE** - for Thymeleaf 3.0
-  * **Version 2.1.0.RELEASE** - for Thymeleaf 2.1 (requires 2.1.3+)
+  * **Version 3.0.0.RELEASE** - for Thymeleaf 3.0 (requires Thymeleaf 3.0.0+)
+  * **Version 2.1.0.RELEASE** - for Thymeleaf 2.1 (requires Thymeleaf 2.1.3+)
 
 
 License
@@ -24,11 +24,11 @@ This software is licensed under the [Apache License 2.0]
 (http://www.apache.org/licenses/LICENSE-2.0.html).
 
 
-Requirements
-------------
+Requirements (3.0.x)
+--------------------
 
   *   Java **8**
-  *   Thymeleaf **2.1.3+**
+  *   Thymeleaf **3.0.0+**
 
 
 Maven info
