@@ -38,9 +38,19 @@ public class TemporalsFormattingTest {
     }
     
     @Test
+    public void testFormatWithNullTemporal() {
+        assertNull(temporals.format(null));
+    }
+
+    @Test
     public void testFormatWithLocale() {
         Temporal time = ZonedDateTime.of(2015, 12, 31, 23, 59, 45, 0, ZoneOffset.UTC);
         assertEquals("31. Dezember 2015 23:59:45 Z", temporals.format(time, Locale.GERMAN));
+    }
+
+    @Test
+    public void testFormatWithLocaleAndNullTemporal() {
+        assertNull(temporals.format(null, Locale.GERMAN));
     }
 
     @Test
@@ -52,11 +62,21 @@ public class TemporalsFormattingTest {
     }
 
     @Test
+    public void testFormatWithPatternAndNullTemporal() {
+        assertNull(temporals.format(null, "y"));
+    }
+
+    @Test
     public void testFormatWithPatternAndLocale() {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);
         String pattern = "EEEE, d MMMM, yyyy";
         String expectd = "Donnerstag, 31 Dezember, 2015";
         assertEquals(expectd, temporals.format(time, pattern, Locale.GERMAN));
+    }
+
+    @Test
+    public void testFormatWithPatternAndLocaleAndNullTemporal() {
+        assertNull(temporals.format(null, "y", Locale.GERMAN));
     }
 
     @Test
@@ -66,15 +86,30 @@ public class TemporalsFormattingTest {
     }
 
     @Test
+    public void testDayWithNullTemporal() {
+        assertNull(temporals.day(null));
+    }
+
+    @Test
     public void testMonth() {
         Temporal time = LocalDate.of(2015, 12, 31);
         assertEquals(12, temporals.month(time).intValue());
     }
     
     @Test
+    public void testMonthWithNullTemporal() {
+        assertNull(temporals.month(null));
+    }
+
+    @Test
     public void testMonthName() {
         Temporal time = LocalDate.of(2015, 12, 31);
         assertEquals("December", temporals.monthName(time));
+    }
+
+    @Test
+    public void testMonthNameWithNullTemporal() {
+        assertNull(temporals.monthName(null));
     }
 
     @Test
@@ -84,9 +119,19 @@ public class TemporalsFormattingTest {
     }
 
     @Test
+    public void testMonthNameShortWithNullTemporal() {
+        assertNull(temporals.monthNameShort(null));
+    }
+
+    @Test
     public void testYear() {
         Temporal time = LocalDate.of(2015, 12, 31);
         assertEquals(2015, temporals.year(time).intValue());
+    }
+
+    @Test
+    public void testYearWithNullTemporal() {
+        assertNull(temporals.year(null));
     }
 
     @Test
@@ -96,11 +141,21 @@ public class TemporalsFormattingTest {
     }
     
     @Test
+    public void testDayOfWeekWithNullTemporal() {
+        assertNull(temporals.dayOfWeek(null));
+    }
+
+    @Test
     public void testDayOfWeekName() {
         Temporal time = LocalDate.of(2015, 12, 31);
         assertEquals("Thursday", temporals.dayOfWeekName(time));
     }
     
+    @Test
+    public void testDayOfWeekNameWithNullTemporal() {
+        assertNull(temporals.dayOfWeekName(null));
+    }
+
     @Test
     public void testDayOfWeekNameShort() {
         Temporal time = LocalDate.of(2015, 12, 31);
@@ -108,9 +163,19 @@ public class TemporalsFormattingTest {
     }
     
     @Test
+    public void testDayOfWeekNameShortWithNullTemporal() {
+        assertNull(temporals.dayOfWeekNameShort(null));
+    }
+
+    @Test
     public void testHour() {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59, 45, 1);
         assertEquals(23, temporals.hour(time).intValue());
+    }
+
+    @Test
+    public void testHourWithNullTemporal() {
+        assertNull(temporals.hour(null));
     }
 
     @Test
@@ -120,9 +185,19 @@ public class TemporalsFormattingTest {
     }
 
     @Test
+    public void testMinuteWithNullTemporal() {
+        assertNull(temporals.minute(null));
+    }
+
+    @Test
     public void testSecond() {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59, 45, 1);
         assertEquals(45, temporals.second(time).intValue());
+    }
+
+    @Test
+    public void testSecondWithNullTemporal() {
+        assertNull(temporals.second(null));
     }
 
     @Test
@@ -132,9 +207,19 @@ public class TemporalsFormattingTest {
     }
 
     @Test
+    public void testNanosecondWithNullTemporal() {
+        assertNull(temporals.nanosecond(null));
+    }
+
+    @Test
     public void testFormatISO() {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59, 45, 1).atZone(ZoneOffset.MAX);
         assertEquals("2015-12-31T23:59:45.000+1800", temporals.formatISO(time));
+    }
+
+    @Test
+    public void testFormatISOWithNullTemporal() {
+        assertNull(temporals.formatISO(null));
     }
 
 }

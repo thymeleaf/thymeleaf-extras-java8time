@@ -55,12 +55,10 @@ public final class TemporalFormattingUtils {
     }
 
     public String format(final Object target) {
-        Validate.notNull(target, "Cannot apply format on null");
         return formatDate(target);
     }
 
     public String format(final Object target, final Locale locale) {
-        Validate.notNull(target, "Cannot apply format on null");
         Validate.notNull(locale, "Locale cannot be null");
         return formatDate(target, null, locale);
     }
@@ -70,82 +68,94 @@ public final class TemporalFormattingUtils {
     }
 
     public String format(final Object target, final String pattern, final Locale locale) {
-        Validate.notNull(target, "Cannot apply format on null");
         Validate.notEmpty(pattern, "Pattern cannot be null or empty");
         return formatDate(target, pattern, locale);
     }
 
     public Integer day(final Object target) {
-        Validate.notNull(target, "Cannot retrieve day from null");
+        if (target == null) {
+            return null;
+        }
         final TemporalAccessor time = temporal(target);
         return time.get(ChronoField.DAY_OF_MONTH);
     }
 
     public Integer month(final Object target) {
-        Validate.notNull(target, "Cannot retrieve month from null");
+        if (target == null) {
+            return null;
+        }
         final TemporalAccessor time = temporal(target);
         return time.get(ChronoField.MONTH_OF_YEAR);
     }
 
     public String monthName(final Object target) {
-        Validate.notNull(target, "Cannot retrieve month name from null");
         return format(target, "MMMM");
     }
 
     public String monthNameShort(final Object target) {
-        Validate.notNull(target, "Cannot retrieve month name short from null");
         return format(target, "MMM");
     }
 
     public Integer year(final Object target) {
-        Validate.notNull(target, "Cannot retrieve year from null");
+        if (target == null) {
+            return null;
+        }
         final TemporalAccessor time = temporal(target);
         return time.get(ChronoField.YEAR);
     }
 
     public Integer dayOfWeek(final Object target) {
-        Validate.notNull(target, "Cannot retrieve day of week from null");
+        if (target == null) {
+            return null;
+        }
         final TemporalAccessor time = temporal(target);
         return time.get(ChronoField.DAY_OF_WEEK);
     }
 
     public String dayOfWeekName(final Object target) {
-        Validate.notNull(target, "Cannot retrieve day of week name from null");
         return format(target, "EEEE");
     }
 
     public String dayOfWeekNameShort(final Object target) {
-        Validate.notNull(target, "Cannot retrieve day of week name shortfrom null");
         return format(target, "EEE");
     }
 
     public Integer hour(final Object target) {
-        Validate.notNull(target, "Cannot retrieve hour from null");
+        if (target == null) {
+            return null;
+        }
         final TemporalAccessor time = temporal(target);
         return time.get(ChronoField.HOUR_OF_DAY);
     }
 
     public Integer minute(final Object target) {
-        Validate.notNull(target, "Cannot retrieve hour from null");
+        if (target == null) {
+            return null;
+        }
         final TemporalAccessor time = temporal(target);
         return time.get(ChronoField.MINUTE_OF_HOUR);
     }
 
     public Integer second(final Object target) {
-        Validate.notNull(target, "Cannot retrieve hour from null");
+        if (target == null) {
+            return null;
+        }
         final TemporalAccessor time = temporal(target);
         return time.get(ChronoField.SECOND_OF_MINUTE);
     }
 
     public Integer nanosecond(final Object target) {
-        Validate.notNull(target, "Cannot retrieve hour from null");
+        if (target == null) {
+            return null;
+        }
         final TemporalAccessor time = temporal(target);
         return time.get(ChronoField.NANO_OF_SECOND);
     }
 
     public String formatISO(final Object target) {
-        Validate.notNull(target, "Cannot apply format on null");
-        if (target instanceof TemporalAccessor) {
+        if (target == null) {
+            return null;
+        } else if (target instanceof TemporalAccessor) {
             ChronoZonedDateTime time = zonedTime(target, defaultZoneId);
             return ISO8601_DATE_TIME_FORMATTER.withLocale(locale).format(time);
         } else {
@@ -159,10 +169,11 @@ public final class TemporalFormattingUtils {
     }
 
     private String formatDate(final Object target, final String pattern, final Locale localeOverride) {
+        if (target == null) {
+            return null;
+        }
         Locale formattingLocale = localeOverride != null ? localeOverride : locale;
         try {
-            Validate.notNull(target, "Cannot apply format on null");
-
             DateTimeFormatter formatter;
             if (StringUtils.isEmptyOrWhitespace(pattern)) {
                 formatter = TemporalObjects.formatterFor(target, formattingLocale);
