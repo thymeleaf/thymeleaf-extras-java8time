@@ -24,7 +24,7 @@
     <groupId>org.thymeleaf.extras</groupId>
     <artifactId>thymeleaf-extras-java8time</artifactId>
     <packaging>jar</packaging>
-    <version>3.0.1.RELEASE</version>
+    <version>3.0.2-SNAPSHOT</version>
     <name>thymeleaf-extras-java8time</name>
     <url>http://www.thymeleaf.org</url>
 
@@ -47,7 +47,7 @@
         <url>scm:git:git@github.com:thymeleaf/thymeleaf-extras-java8time.git</url>
         <connection>scm:git:git@github.com:thymeleaf/thymeleaf-extras-java8time.git</connection>
         <developerConnection>scm:git:git@github.com:thymeleaf/thymeleaf-extras-java8time.git</developerConnection>
-    <tag>thymeleaf-extras-java8time-3.0.1.RELEASE</tag>
+    <tag>HEAD</tag>
   </scm>
 
     <developers>
