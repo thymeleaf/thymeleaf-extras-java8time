@@ -1,3 +1,11 @@
+3.0.1
+=====
+- Normalisation of null-safety: make #temporals return null for null input, instead of throwing exception.
+
+3.0.0
+=====
+- Adapted extension to the new APIs in Thymeleaf 3
+
 2.1.1
 =====
 - Support for specific formatting of LocalDate, LocalDateTime, ZonedDateTime, Instant, LocalTime,
