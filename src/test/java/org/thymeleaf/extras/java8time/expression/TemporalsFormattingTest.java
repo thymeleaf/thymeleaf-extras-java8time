@@ -15,14 +15,18 @@
  */
 package org.thymeleaf.extras.java8time.expression;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.temporal.Temporal;
 import java.util.Locale;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * Tests regarding formatting of temporal objects.
@@ -222,4 +226,15 @@ public class TemporalsFormattingTest {
         assertNull(temporals.formatISO(null));
     }
 
+    @Test
+    public void testFormatInstant() throws Exception {
+        Instant instant = Instant.ofEpochMilli(1503561536699L);
+        assertEquals("2017-08-24T07:58:56.699Z", temporals.format(instant));
+    }
+
+    @Test
+    public void testFormatInstantWithPattern() throws Exception {
+        Instant instant = Instant.ofEpochMilli(1503561536699L);
+        assertEquals("2017-08-24", temporals.format(instant, "yyyy-MM-dd"));
+    }
 }

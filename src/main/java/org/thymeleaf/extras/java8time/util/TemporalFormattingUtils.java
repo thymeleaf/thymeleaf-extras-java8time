@@ -179,7 +179,7 @@ public final class TemporalFormattingUtils {
                 formatter = TemporalObjects.formatterFor(target, formattingLocale);
                 return formatter.format(temporal(target));
             } else {
-                formatter = DateTimeFormatter.ofPattern(pattern, formattingLocale);
+                formatter = DateTimeFormatter.ofPattern(pattern, formattingLocale).withZone(defaultZoneId);
                 return formatter.format(temporal(target));
             }
         } catch (final Exception e) {
