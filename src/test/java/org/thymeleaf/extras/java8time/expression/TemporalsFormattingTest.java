@@ -15,8 +15,6 @@
  */
 package org.thymeleaf.extras.java8time.expression;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -27,6 +25,7 @@ import java.time.temporal.Temporal;
 import java.util.Locale;
 
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * Tests regarding formatting of temporal objects.
@@ -40,7 +39,7 @@ public class TemporalsFormattingTest {
         Temporal time = ZonedDateTime.of(2015, 12, 31, 23, 59, 45, 0, ZoneOffset.UTC);
         assertEquals("December 31, 2015 11:59:45 PM Z", temporals.format(time));
     }
-    
+
     @Test
     public void testFormatWithNullTemporal() {
         assertNull(temporals.format(null));
