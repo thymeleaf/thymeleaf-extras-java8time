@@ -1,3 +1,7 @@
+3.0.2
+=====
+- Updated SLF4j dependency to 1.7.25.
+
 3.0.1
 =====
 - Normalisation of null-safety: make #temporals return null for null input, instead of throwing exception.
