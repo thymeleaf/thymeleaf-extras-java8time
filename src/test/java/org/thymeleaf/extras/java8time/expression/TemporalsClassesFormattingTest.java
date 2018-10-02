@@ -46,13 +46,13 @@ public class TemporalsClassesFormattingTest {
     @Test
     public void localDateTime() {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59, 45);
-        assertEquals("December 31, 2015 11:59:45 PM", temporals.format(time));
+        assertEquals("December 31, 2015, 11:59:45 PM", temporals.format(time));
     }
     
     @Test
     public void zonedDateTime() {
         Temporal time = ZonedDateTime.of(2015, 12, 31, 23, 59, 45, 0, ZoneOffset.UTC);
-        assertEquals("December 31, 2015 11:59:45 PM Z", temporals.format(time));
+        assertEquals("December 31, 2015 at 11:59:45 PM Z", temporals.format(time));
     }
     
     @Test

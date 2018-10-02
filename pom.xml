@@ -147,26 +147,27 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>${maven.compile.source}</source>
                     <target>${maven.compile.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
+                <version>3.1.0</version>
                 <configuration>
-                    <encoding>US-ASCII</encoding>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.5</version>
+                <version>3.1.0</version>
                 <configuration>
                     <archive>
                         <addMavenDescriptor>false</addMavenDescriptor>
@@ -193,13 +194,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.1</version>
+                <version>3.0.1</version>
                 <configuration>
+                    <show>protected</show>
                     <noqualifier>java.lang</noqualifier>
                     <overview>${basedir}/src/main/javadoc/overview.html</overview>
                     <javadocDirectory>${basedir}/src/main/javadoc</javadocDirectory>
                     <reportOutputDirectory>${project.reporting.outputDirectory}/api/${project.artifactId}/apidocs</reportOutputDirectory>
-                    <additionalparam>-Xdoclint:none</additionalparam>
+                    <additionalJOption>--no-module-directories</additionalJOption>
                 </configuration>
                 <executions>
                     <execution>
@@ -214,7 +216,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -228,13 +230,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.2-beta-5</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>make-assembly-dist</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>attached</goal>
+                            <goal>single</goal>
                         </goals>
                         <configuration>
                             <descriptors>
@@ -265,7 +267,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.2</version>
+                <version>2.5.3</version>
             </plugin>
 
 

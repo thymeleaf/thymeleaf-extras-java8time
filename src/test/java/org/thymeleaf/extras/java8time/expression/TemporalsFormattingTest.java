@@ -34,7 +34,7 @@ public class TemporalsFormattingTest {
     @Test
     public void testFormat() {
         Temporal time = ZonedDateTime.of(2015, 12, 31, 23, 59, 45, 0, ZoneOffset.UTC);
-        assertEquals("December 31, 2015 11:59:45 PM Z", temporals.format(time));
+        assertEquals("December 31, 2015 at 11:59:45 PM Z", temporals.format(time));
     }
     
     @Test
@@ -45,7 +45,7 @@ public class TemporalsFormattingTest {
     @Test
     public void testFormatWithLocale() {
         Temporal time = ZonedDateTime.of(2015, 12, 31, 23, 59, 45, 0, ZoneOffset.UTC);
-        assertEquals("31. Dezember 2015 23:59:45 Z", temporals.format(time, Locale.GERMAN));
+        assertEquals("31. Dezember 2015 um 23:59:45 Z", temporals.format(time, Locale.GERMAN));
     }
 
     @Test
