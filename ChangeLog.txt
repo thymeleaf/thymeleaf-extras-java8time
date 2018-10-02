@@ -1,6 +1,7 @@
 3.0.2
 =====
 - Updated SLF4j dependency to 1.7.25.
+- Added "Automatic-Module-Name: thymeleaf-extras-java8time" to MANIFEST.MF for Java 9+ JPMS.
 
 3.0.1
 =====
