@@ -15,10 +15,7 @@
  */
 package org.thymeleaf.extras.java8time.expression;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.temporal.Temporal;
 import java.util.Locale;
 import org.junit.Test;
@@ -220,6 +217,13 @@ public class TemporalsFormattingTest {
     @Test
     public void testFormatISOWithNullTemporal() {
         assertNull(temporals.formatISO(null));
+    }
+
+    @Test
+    // https://github.com/thymeleaf/thymeleaf-extras-java8time/issues/17
+    public void testIssue17() {
+        Instant time = Instant.ofEpochSecond(1);
+        assertEquals("1970-01-01", temporals.format(time, "yyyy-MM-dd", Locale.ENGLISH));
     }
 
 }

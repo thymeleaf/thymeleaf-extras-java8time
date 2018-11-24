@@ -180,7 +180,7 @@ public final class TemporalFormattingUtils {
                 return formatter.format(temporal(target));
             } else {
                 formatter = DateTimeFormatter.ofPattern(pattern, formattingLocale);
-                return formatter.format(temporal(target));
+                return formatter.format(zonedTime(target, defaultZoneId));
             }
         } catch (final Exception e) {
             throw new TemplateProcessingException(
