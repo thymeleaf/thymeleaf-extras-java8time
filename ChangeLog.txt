@@ -2,6 +2,10 @@
 =====
 - Updated SLF4j dependency to 1.7.25.
 - Added "Automatic-Module-Name: thymeleaf-extras-java8time" to MANIFEST.MF for Java 9+ JPMS.
+- Adapted expected test results to formatting rules of Java 11 LTS.
+- Fixed issue
+https://github.com/thymeleaf/thymeleaf-extras-java8time/issues/17 regarding
+formatting with custom patterns
 
 3.0.1
 =====
