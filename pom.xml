@@ -109,7 +109,7 @@
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <!-- A project-name-based approach is adopted for the module name (instead of a reverse-DNS one) -->
         <module.name>${project.artifactId}</module.name>
-        <thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
+        <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
         <slf4j.version>1.7.25</slf4j.version>
         <!-- The following dependencies are for testing only -->
         <junit.version>4.12</junit.version>
