@@ -6,6 +6,8 @@
 - Fixed issue
 https://github.com/thymeleaf/thymeleaf-extras-java8time/issues/17 regarding
 formatting with custom patterns
+- Allowing SHORT, MEDIUM, LONG and FULL as pattern values to use the java.time.format.FormatStyle patterns
+- Localised formatters for OffsetDateTime and YearMonth classes
 
 3.0.1
 =====
