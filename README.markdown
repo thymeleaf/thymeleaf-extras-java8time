@@ -97,6 +97,7 @@ ${#temporals.setFormat(temporalsSet, locale)}
 
 /*
  * Format date with the specified pattern
+ * SHORT, MEDIUM, LONG and FULL can also be specified to used the default java.time.format.FormatStyle patterns
  * Also works with arrays, lists or sets
  */
 ${#temporals.format(temporal, 'dd/MMM/yyyy HH:mm')}

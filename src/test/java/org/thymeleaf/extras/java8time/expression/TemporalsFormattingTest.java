@@ -59,6 +59,15 @@ public class TemporalsFormattingTest {
     }
 
     @Test
+    public void testFormatStandardPattern() {
+        Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);
+        assertEquals("31/12/2015, 23:59", temporals.format(time, "SHORT", Locale.ENGLISH));
+        assertEquals("31 Dec 2015, 23:59:00", temporals.format(time, "MEDIUM", Locale.ENGLISH));
+        assertEquals("31 December 2015 at 23:59:00 Z", temporals.format(time, "LONG", Locale.ENGLISH));
+        assertEquals("Thursday, 31 December 2015 at 23:59:00 Z", temporals.format(time, "FULL", Locale.ENGLISH));
+    }
+
+    @Test
     public void testFormatWithPatternAndNullTemporal() {
         assertNull(temporals.format(null, "y"));
     }

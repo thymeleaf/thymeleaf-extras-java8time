@@ -123,7 +123,7 @@ public final class TemporalObjects {
         }
     }
     
-    private static DateTimeFormatter yearMonthFormatter(Locale locale) {
+    private static DateTimeFormatter yearMonthFormatter(final Locale locale) {
         if (shouldDisplayYearBeforeMonth(locale)) {
             return new DateTimeFormatterBuilder()
                 .appendValue(ChronoField.YEAR)
@@ -141,7 +141,7 @@ public final class TemporalObjects {
         }
     }
     
-    private static boolean shouldDisplayYearBeforeMonth(Locale locale) {
+    private static boolean shouldDisplayYearBeforeMonth(final Locale locale) {
         // We use "Month Year" or "Year Month" depending on the locale according to https://en.wikipedia.org/wiki/Date_format_by_country
         String country = locale.getCountry();
         switch (country) {
