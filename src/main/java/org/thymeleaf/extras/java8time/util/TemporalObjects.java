@@ -30,10 +30,7 @@ import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.chrono.ChronoZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.FormatStyle;
-import java.time.format.TextStyle;
+import java.time.format.*;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.util.Locale;
@@ -66,7 +63,6 @@ public final class TemporalObjects {
         } else if (target instanceof LocalTime) {
             return DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM).withLocale(locale);
         } else if (target instanceof OffsetTime) {
-            // FIXME: localise
             return new DateTimeFormatterBuilder()
                 .appendValue(ChronoField.HOUR_OF_DAY)
                 .appendLiteral(':')
@@ -77,19 +73,8 @@ public final class TemporalObjects {
                 .toFormatter()
                 .withLocale(locale);
         } else if (target instanceof OffsetDateTime) {
-            // FIXME: localise
             return new DateTimeFormatterBuilder()
-                .appendText(ChronoField.MONTH_OF_YEAR)
-                .appendLiteral(' ')
-                .appendValue(ChronoField.DAY_OF_MONTH)
-                .appendLiteral(", ")
-                .appendValue(ChronoField.YEAR)
-                .appendLiteral(' ')
-                .appendValue(ChronoField.HOUR_OF_DAY)
-                .appendLiteral(':')
-                .appendValue(ChronoField.MINUTE_OF_HOUR)
-                .appendLiteral(':')
-                .appendValue(ChronoField.SECOND_OF_MINUTE)
+                .appendLocalized(FormatStyle.LONG, FormatStyle.MEDIUM)
                 .appendLocalizedOffset(TextStyle.FULL)
                 .toFormatter()
                 .withLocale(locale);
@@ -98,13 +83,7 @@ public final class TemporalObjects {
                 .appendValue(ChronoField.YEAR)
                 .toFormatter();
         } else if (target instanceof YearMonth) {
-            // FIXME: localise
-            return new DateTimeFormatterBuilder()
-                .appendText(ChronoField.MONTH_OF_YEAR)
-                .appendLiteral(' ')
-                .appendValue(ChronoField.YEAR)
-                .toFormatter()
-                .withLocale(locale);
+            return yearMonthFormatter(locale);
         } else {
             throw new IllegalArgumentException(
                 "Cannot format object of class \"" + target.getClass().getName() + "\" as a date");
@@ -143,4 +122,44 @@ public final class TemporalObjects {
                 "Cannot normalize class \"" + target.getClass().getName() + "\" as a date");
         }
     }
+    
+    private static DateTimeFormatter yearMonthFormatter(Locale locale) {
+        if (shouldDisplayYearBeforeMonth(locale)) {
+            return new DateTimeFormatterBuilder()
+                .appendValue(ChronoField.YEAR)
+                .appendLiteral(' ')
+                .appendText(ChronoField.MONTH_OF_YEAR)
+                .toFormatter()
+                .withLocale(locale);
+        } else {
+            return new DateTimeFormatterBuilder()
+                .appendText(ChronoField.MONTH_OF_YEAR)
+                .appendLiteral(' ')
+                .appendValue(ChronoField.YEAR)
+                .toFormatter()
+                .withLocale(locale);
+        }
+    }
+    
+    private static boolean shouldDisplayYearBeforeMonth(Locale locale) {
+        // We use "Month Year" or "Year Month" depending on the locale according to https://en.wikipedia.org/wiki/Date_format_by_country
+        String country = locale.getCountry();
+        switch (country) {
+            case "BT" :
+            case "CA" :
+            case "CN" :
+            case "KP" :
+            case "KR" :
+            case "TW" :
+            case "HU" :
+            case "IR" :
+            case "JP" :
+            case "LT" :
+            case "MN" :
+                return true;
+            default:
+                return false;
+        }
+    }
+
 }

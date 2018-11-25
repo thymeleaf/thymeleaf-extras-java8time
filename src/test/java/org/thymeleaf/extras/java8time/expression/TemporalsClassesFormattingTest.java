@@ -77,9 +77,10 @@ public class TemporalsClassesFormattingTest {
     @Test
     public void offsetDateTime() {
         Temporal time = OffsetDateTime.of(2015, 12, 31, 23, 59, 45, 0, ZoneOffset.MAX);
-        assertEquals("December 31, 2015 23:59:45GMT+18:00", temporals.format(time));
+        assertEquals("December 31, 2015, 11:59:45 PMGMT+18:00", temporals.format(time, Locale.ENGLISH));
+        assertEquals("31. Dezember 2015, 23:59:45GMT+18:00", temporals.format(time, Locale.GERMAN));
     }
-    
+
     @Test
     public void year() {
         Temporal time = Year.of(2015);
@@ -89,6 +90,13 @@ public class TemporalsClassesFormattingTest {
     @Test
     public void yearMonth() {
         Temporal time = YearMonth.of(2015, 12);
-        assertEquals("December 2015", temporals.format(time));
+        assertEquals("December 2015", temporals.format(time, Locale.ENGLISH));
     }
+    
+    @Test
+    public void yearMonthForYMDLocales() {
+        Temporal time = YearMonth.of(2015, 12);
+        assertEquals("2015 December", temporals.format(time, Locale.CANADA));
+    }
+
 }
