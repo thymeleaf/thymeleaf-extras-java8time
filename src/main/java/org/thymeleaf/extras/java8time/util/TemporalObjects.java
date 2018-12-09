@@ -103,6 +103,8 @@ public final class TemporalObjects {
             return (ChronoZonedDateTime) target;
         } else if (target instanceof LocalDateTime) {
             return ZonedDateTime.of((LocalDateTime) target, defaultZoneId);
+        } else if (target instanceof LocalTime) {
+            return ZonedDateTime.of(LocalDate.now(), (LocalTime) target, defaultZoneId);
         } else if (target instanceof LocalDate) {
             return ZonedDateTime.of((LocalDate) target, LocalTime.MIDNIGHT, defaultZoneId);
         } else if (target instanceof Instant) {

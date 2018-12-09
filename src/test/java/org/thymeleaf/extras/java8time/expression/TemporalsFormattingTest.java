@@ -84,6 +84,13 @@ public class TemporalsFormattingTest {
     public void testFormatWithPatternAndLocaleAndNullTemporal() {
         assertNull(temporals.format(null, "y", Locale.GERMAN));
     }
+    
+    @Test
+    public void localTimeWithPattern() {
+        Temporal time = LocalTime.of(23, 59, 45);
+        assertEquals("23:59:45", temporals.format(time, "HH:mm:ss"));
+    }
+    
 
     @Test
     public void testDay() {

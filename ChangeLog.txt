@@ -1,5 +1,6 @@
 3.0.3
 =====
+- Fixed problem formatting LocalTime with custom pattern https://github.com/thymeleaf/thymeleaf-extras-java8time/issues/20
 
 3.0.2
 =====
