@@ -24,7 +24,7 @@
     <groupId>org.thymeleaf.extras</groupId>
     <artifactId>thymeleaf-extras-java8time</artifactId>
     <packaging>jar</packaging>
-    <version>3.0.3.RELEASE</version>
+    <version>3.0.4-SNAPSHOT</version>
     <name>thymeleaf-extras-java8time</name>
     <url>http://www.thymeleaf.org</url>
 
