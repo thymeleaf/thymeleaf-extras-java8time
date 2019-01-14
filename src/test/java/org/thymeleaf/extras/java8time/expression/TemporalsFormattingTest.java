@@ -91,6 +91,11 @@ public class TemporalsFormattingTest {
         assertEquals("23:59:45", temporals.format(time, "HH:mm:ss"));
     }
     
+    @Test
+    public void offsetDateTimeWithPattern() {
+        OffsetDateTime odt = OffsetDateTime.of(LocalDateTime.of(2015, 12, 31, 23, 59, 45), ZoneOffset.UTC);
+        assertEquals("12/31/2015 23:59:45", temporals.format(odt, "MM/dd/yyyy HH:mm:ss"));
+    }
 
     @Test
     public void testDay() {

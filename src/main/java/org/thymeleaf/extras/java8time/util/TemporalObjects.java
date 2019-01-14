@@ -109,6 +109,8 @@ public final class TemporalObjects {
             return ZonedDateTime.of((LocalDate) target, LocalTime.MIDNIGHT, defaultZoneId);
         } else if (target instanceof Instant) {
             return ZonedDateTime.ofInstant((Instant) target, defaultZoneId);
+        } else if (target instanceof OffsetDateTime) {
+            return ((OffsetDateTime) target).toZonedDateTime();
         } else {
             throw new IllegalArgumentException(
                 "Cannot format object of class \"" + target.getClass().getName() + "\" as a date");
