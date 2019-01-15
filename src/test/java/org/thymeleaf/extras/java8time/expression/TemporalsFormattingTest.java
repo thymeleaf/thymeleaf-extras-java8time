@@ -96,8 +96,26 @@ public class TemporalsFormattingTest {
     
     @Test
     public void offsetDateTimeWithPattern() {
-        OffsetDateTime odt = OffsetDateTime.of(LocalDateTime.of(2015, 12, 31, 23, 59, 45), ZoneOffset.UTC);
-        assertEquals("12/31/2015 23:59:45", temporals.format(odt, "MM/dd/yyyy HH:mm:ss"));
+        OffsetDateTime time = OffsetDateTime.of(LocalDateTime.of(2015, 12, 31, 23, 59, 45), ZoneOffset.UTC);
+        assertEquals("12/31/2015 23:59:45", temporals.format(time, "MM/dd/yyyy HH:mm:ss"));
+    }
+
+    @Test
+    public void offsetTimeWithPattern() {
+        OffsetTime time = OffsetTime.of(LocalTime.of(23, 59, 45), ZoneOffset.UTC);
+        assertEquals("23:59:45", temporals.format(time, "HH:mm:ss"));
+    }
+
+    @Test
+    public void yearWithPattern() {
+        Year time = Year.of(2015);
+        assertEquals("2015", temporals.format(time, "yyyy"));
+    }
+
+    @Test
+    public void yearMonthWithPattern() {
+        YearMonth time = YearMonth.of(2015, 12);
+        assertEquals("12/2015", temporals.format(time, "MM/yyyy"));
     }
 
     @Test

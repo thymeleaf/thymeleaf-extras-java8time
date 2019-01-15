@@ -26,7 +26,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 import java.util.TimeZone;
-import org.thymeleaf.util.EvaluationUtil;
+import org.thymeleaf.util.EvaluationUtils;
 import org.thymeleaf.util.Validate;
 
 /**
@@ -159,7 +159,7 @@ public final class TemporalCreationUtils {
 
     private int integer(final Object number) {
         Validate.notNull(number, "Argument cannot be null");
-        return EvaluationUtil.evaluateAsNumber(number).intValue();
+        return EvaluationUtils.evaluateAsNumber(number).intValue();
     }
 
     private ZoneId zoneId(final Object zoneId) {

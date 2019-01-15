@@ -52,16 +52,20 @@ public final class TemporalObjects {
     public static DateTimeFormatter formatterFor(final Object target, final Locale locale) {
         Validate.notNull(target, "Target cannot be null");
         Validate.notNull(locale, "Locale cannot be null");
-        if (target instanceof LocalDate) {
+        if (target instanceof Instant) {
+            return new DateTimeFormatterBuilder().appendInstant().toFormatter();
+        } else if (target instanceof LocalDate) {
             return DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(locale);
         } else if (target instanceof LocalDateTime) {
             return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.MEDIUM).withLocale(locale);
-        } else if (target instanceof ZonedDateTime) {
-            return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG).withLocale(locale);
-        } else if (target instanceof Instant) {
-            return new DateTimeFormatterBuilder().appendInstant().toFormatter();
         } else if (target instanceof LocalTime) {
             return DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM).withLocale(locale);
+        } else if (target instanceof OffsetDateTime) {
+            return new DateTimeFormatterBuilder()
+                .appendLocalized(FormatStyle.LONG, FormatStyle.MEDIUM)
+                .appendLocalizedOffset(TextStyle.FULL)
+                .toFormatter()
+                .withLocale(locale);
         } else if (target instanceof OffsetTime) {
             return new DateTimeFormatterBuilder()
                 .appendValue(ChronoField.HOUR_OF_DAY)
@@ -72,18 +76,14 @@ public final class TemporalObjects {
                 .appendLocalizedOffset(TextStyle.FULL)
                 .toFormatter()
                 .withLocale(locale);
-        } else if (target instanceof OffsetDateTime) {
-            return new DateTimeFormatterBuilder()
-                .appendLocalized(FormatStyle.LONG, FormatStyle.MEDIUM)
-                .appendLocalizedOffset(TextStyle.FULL)
-                .toFormatter()
-                .withLocale(locale);
         } else if (target instanceof Year) {
             return new DateTimeFormatterBuilder()
                 .appendValue(ChronoField.YEAR)
                 .toFormatter();
         } else if (target instanceof YearMonth) {
             return yearMonthFormatter(locale);
+        } else if (target instanceof ZonedDateTime) {
+            return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG).withLocale(locale);
         } else {
             throw new IllegalArgumentException(
                 "Cannot format object of class \"" + target.getClass().getName() + "\" as a date");
@@ -99,18 +99,27 @@ public final class TemporalObjects {
     public static ChronoZonedDateTime zonedTime(final Object target, final ZoneId defaultZoneId) {
         Validate.notNull(target, "Target cannot be null");
         Validate.notNull(defaultZoneId, "ZoneId cannot be null");
-        if (target instanceof ChronoZonedDateTime) {
-            return (ChronoZonedDateTime) target;
+        if (target instanceof Instant) {
+            return ZonedDateTime.ofInstant((Instant) target, defaultZoneId);
+        } else if (target instanceof LocalDate) {
+            return ZonedDateTime.of((LocalDate) target, LocalTime.MIDNIGHT, defaultZoneId);
         } else if (target instanceof LocalDateTime) {
             return ZonedDateTime.of((LocalDateTime) target, defaultZoneId);
         } else if (target instanceof LocalTime) {
             return ZonedDateTime.of(LocalDate.now(), (LocalTime) target, defaultZoneId);
-        } else if (target instanceof LocalDate) {
-            return ZonedDateTime.of((LocalDate) target, LocalTime.MIDNIGHT, defaultZoneId);
-        } else if (target instanceof Instant) {
-            return ZonedDateTime.ofInstant((Instant) target, defaultZoneId);
         } else if (target instanceof OffsetDateTime) {
             return ((OffsetDateTime) target).toZonedDateTime();
+        } else if (target instanceof OffsetTime) {
+            LocalTime localTime = ((OffsetTime) target).toLocalTime();
+            return ZonedDateTime.of(LocalDate.now(), localTime, defaultZoneId);
+        } else if (target instanceof Year) {
+            LocalDate localDate = ((Year) target).atDay(1);
+            return ZonedDateTime.of(localDate, LocalTime.MIDNIGHT, defaultZoneId);
+        } else if (target instanceof YearMonth) {
+            LocalDate localDate = ((YearMonth) target).atDay(1);
+            return ZonedDateTime.of(localDate, LocalTime.MIDNIGHT, defaultZoneId);
+        } else if (target instanceof ZonedDateTime) {
+            return (ChronoZonedDateTime) target;
         } else {
             throw new IllegalArgumentException(
                 "Cannot format object of class \"" + target.getClass().getName() + "\" as a date");
