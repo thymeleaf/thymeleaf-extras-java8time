@@ -1,3 +1,7 @@
+3.0.4
+=====
+- When the patterns defined at java.time.format.FormatStyle (SHORT, MEDIUM, LONG, FULL) were used, Locale was ignored.
+
 3.0.3
 =====
 - Fixed problem formatting LocalTime with custom pattern https://github.com/thymeleaf/thymeleaf-extras-java8time/issues/20

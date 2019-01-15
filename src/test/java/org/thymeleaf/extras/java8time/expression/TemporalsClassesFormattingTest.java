@@ -35,7 +35,7 @@ import static org.junit.Assert.*;
  */
 public class TemporalsClassesFormattingTest {
     
-    private final Temporals temporals = new Temporals(Locale.ENGLISH, ZoneOffset.UTC);
+    private final Temporals temporals = new Temporals(Locale.US, ZoneOffset.UTC);
 
     @Test
     public void localDate() {
@@ -77,8 +77,8 @@ public class TemporalsClassesFormattingTest {
     @Test
     public void offsetDateTime() {
         Temporal time = OffsetDateTime.of(2015, 12, 31, 23, 59, 45, 0, ZoneOffset.MAX);
-        assertEquals("December 31, 2015, 11:59:45 PMGMT+18:00", temporals.format(time, Locale.ENGLISH));
-        assertEquals("31. Dezember 2015, 23:59:45GMT+18:00", temporals.format(time, Locale.GERMAN));
+        assertEquals("December 31, 2015, 11:59:45 PMGMT+18:00", temporals.format(time, Locale.US));
+        assertEquals("31. Dezember 2015, 23:59:45GMT+18:00", temporals.format(time, Locale.GERMANY));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class TemporalsClassesFormattingTest {
     @Test
     public void yearMonth() {
         Temporal time = YearMonth.of(2015, 12);
-        assertEquals("December 2015", temporals.format(time, Locale.ENGLISH));
+        assertEquals("December 2015", temporals.format(time, Locale.US));
     }
     
     @Test

@@ -191,10 +191,10 @@ public final class TemporalFormattingUtils {
 
     private DateTimeFormatter defaultOrPatternFormatted(final String pattern, final Locale locale) {
         switch (pattern) {
-            case "SHORT"  : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
-            case "MEDIUM" : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
-            case "LONG"   : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG);
-            case "FULL"   : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL);
+            case "SHORT"  : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withLocale(locale);
+            case "MEDIUM" : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(locale);
+            case "LONG"   : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG).withLocale(locale);
+            case "FULL"   : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).withLocale(locale);
             default       : return DateTimeFormatter.ofPattern(pattern, locale);
         }
     }

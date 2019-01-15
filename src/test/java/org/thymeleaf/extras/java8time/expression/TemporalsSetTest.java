@@ -31,7 +31,7 @@ import static org.junit.Assert.*;
  */
 public class TemporalsSetTest {
     
-    private final Temporals temporals = new Temporals(Locale.ENGLISH, ZoneOffset.UTC);
+    private final Temporals temporals = new Temporals(Locale.US, ZoneOffset.UTC);
 
     @Test
     public void testSetFormat() {
@@ -44,7 +44,7 @@ public class TemporalsSetTest {
     public void testSetFormatWithLocale() {
         Set<Temporal> set = new TreeSet<>(asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)));
         Set<String> expected = new TreeSet<>(asList("1. Januar 2015", "31. Dezember 2015"));
-        assertEquals(expected, temporals.setFormat(set, Locale.GERMAN));
+        assertEquals(expected, temporals.setFormat(set, Locale.GERMANY));
     }
     
     @Test
@@ -60,7 +60,7 @@ public class TemporalsSetTest {
         Set<Temporal> set = new TreeSet<>(asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)));
         String pattern = "EEEE, d MMMM, yyyy";
         Set<String> expected = new TreeSet<>(asList("Donnerstag, 1 Januar, 2015", "Donnerstag, 31 Dezember, 2015"));
-        assertEquals(expected, temporals.setFormat(set, pattern, Locale.GERMAN));
+        assertEquals(expected, temporals.setFormat(set, pattern, Locale.GERMANY));
     }
 
     @Test

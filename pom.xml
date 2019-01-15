@@ -47,7 +47,6 @@
         <url>scm:git:git@github.com:thymeleaf/thymeleaf-extras-java8time.git</url>
         <connection>scm:git:git@github.com:thymeleaf/thymeleaf-extras-java8time.git</connection>
         <developerConnection>scm:git:git@github.com:thymeleaf/thymeleaf-extras-java8time.git</developerConnection>
-    <tag>thymeleaf-extras-java8time-3.0.3</tag>
   </scm>
 
     <developers>

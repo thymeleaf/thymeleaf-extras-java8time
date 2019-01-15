@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
  */
 public class TemporalsListTest {
     
-    private final Temporals temporals = new Temporals(Locale.ENGLISH, ZoneOffset.UTC);
+    private final Temporals temporals = new Temporals(Locale.US, ZoneOffset.UTC);
 
     @Test
     public void testListFormat() {
@@ -43,7 +43,7 @@ public class TemporalsListTest {
     public void testListFormatWithLocale() {
         List<Temporal> list = asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31));
         List<String> expected = asList("1. Januar 2015", "31. Dezember 2015");
-        assertEquals(expected, temporals.listFormat(list, Locale.GERMAN));
+        assertEquals(expected, temporals.listFormat(list, Locale.GERMANY));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class TemporalsListTest {
         List<Temporal> list = asList(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31));
         String pattern = "EEEE, d MMMM, yyyy";
         List<String> expected = asList("Donnerstag, 1 Januar, 2015", "Donnerstag, 31 Dezember, 2015");
-        assertEquals(expected, temporals.listFormat(list, pattern, Locale.GERMAN));
+        assertEquals(expected, temporals.listFormat(list, pattern, Locale.GERMANY));
     }
 
     @Test

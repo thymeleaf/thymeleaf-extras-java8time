@@ -15,18 +15,21 @@
  */
 package org.thymeleaf.extras.java8time.expression;
 
+import org.junit.Test;
+
 import java.time.*;
 import java.time.temporal.Temporal;
 import java.util.Locale;
-import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Tests regarding formatting of temporal objects.
  */
 public class TemporalsFormattingTest {
     
-    private final Temporals temporals = new Temporals(Locale.ENGLISH, ZoneOffset.UTC);
+    private final Temporals temporals = new Temporals(Locale.US, ZoneOffset.UTC);
 
     @Test
     public void testFormat() {
@@ -42,12 +45,12 @@ public class TemporalsFormattingTest {
     @Test
     public void testFormatWithLocale() {
         Temporal time = ZonedDateTime.of(2015, 12, 31, 23, 59, 45, 0, ZoneOffset.UTC);
-        assertEquals("31. Dezember 2015 um 23:59:45 Z", temporals.format(time, Locale.GERMAN));
+        assertEquals("31. Dezember 2015 um 23:59:45 Z", temporals.format(time, Locale.GERMANY));
     }
 
     @Test
     public void testFormatWithLocaleAndNullTemporal() {
-        assertNull(temporals.format(null, Locale.GERMAN));
+        assertNull(temporals.format(null, Locale.GERMANY));
     }
 
     @Test
@@ -61,10 +64,10 @@ public class TemporalsFormattingTest {
     @Test
     public void testFormatStandardPattern() {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);
-        assertEquals("31/12/2015, 23:59", temporals.format(time, "SHORT", Locale.ENGLISH));
-        assertEquals("31 Dec 2015, 23:59:00", temporals.format(time, "MEDIUM", Locale.ENGLISH));
-        assertEquals("31 December 2015 at 23:59:00 Z", temporals.format(time, "LONG", Locale.ENGLISH));
-        assertEquals("Thursday, 31 December 2015 at 23:59:00 Z", temporals.format(time, "FULL", Locale.ENGLISH));
+        assertEquals("12/31/15, 11:59 PM", temporals.format(time, "SHORT", Locale.US));
+        assertEquals("Dec 31, 2015, 11:59:00 PM", temporals.format(time, "MEDIUM", Locale.US));
+        assertEquals("December 31, 2015 at 11:59:00 PM Z", temporals.format(time, "LONG", Locale.US));
+        assertEquals("Thursday, December 31, 2015 at 11:59:00 PM Z", temporals.format(time, "FULL", Locale.US));
     }
 
     @Test
@@ -77,12 +80,12 @@ public class TemporalsFormattingTest {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);
         String pattern = "EEEE, d MMMM, yyyy";
         String expectd = "Donnerstag, 31 Dezember, 2015";
-        assertEquals(expectd, temporals.format(time, pattern, Locale.GERMAN));
+        assertEquals(expectd, temporals.format(time, pattern, Locale.GERMANY));
     }
 
     @Test
     public void testFormatWithPatternAndLocaleAndNullTemporal() {
-        assertNull(temporals.format(null, "y", Locale.GERMAN));
+        assertNull(temporals.format(null, "y", Locale.GERMANY));
     }
     
     @Test
@@ -239,7 +242,7 @@ public class TemporalsFormattingTest {
     // https://github.com/thymeleaf/thymeleaf-extras-java8time/issues/17
     public void testIssue17() {
         Instant time = Instant.ofEpochSecond(1);
-        assertEquals("1970-01-01", temporals.format(time, "yyyy-MM-dd", Locale.ENGLISH));
+        assertEquals("1970-01-01", temporals.format(time, "yyyy-MM-dd", Locale.US));
     }
 
 }
