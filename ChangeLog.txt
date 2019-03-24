@@ -2,6 +2,7 @@
 =====
 - When the patterns defined at java.time.format.FormatStyle (SHORT, MEDIUM, LONG, FULL) were used, Locale was ignored.
 - Added support for pattern formatting for some classes without timezone.
+- Fixed automatic module name error
 
 3.0.3
 =====
