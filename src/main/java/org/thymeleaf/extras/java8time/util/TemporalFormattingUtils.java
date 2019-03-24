@@ -22,6 +22,7 @@ package org.thymeleaf.extras.java8time.util;
 import java.time.ZoneId;
 import java.time.chrono.ChronoZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.util.Locale;
@@ -179,12 +180,22 @@ public final class TemporalFormattingUtils {
                 formatter = TemporalObjects.formatterFor(target, formattingLocale);
                 return formatter.format(temporal(target));
             } else {
-                formatter = DateTimeFormatter.ofPattern(pattern, formattingLocale);
-                return formatter.format(temporal(target));
+                formatter = defaultOrPatternFormatted(pattern, formattingLocale);
+                return formatter.format(zonedTime(target, defaultZoneId));
             }
         } catch (final Exception e) {
             throw new TemplateProcessingException(
                 "Error formatting date for locale " + formattingLocale, e);
+        }
+    }
+
+    private DateTimeFormatter defaultOrPatternFormatted(final String pattern, final Locale locale) {
+        switch (pattern) {
+            case "SHORT"  : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withLocale(locale);
+            case "MEDIUM" : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(locale);
+            case "LONG"   : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG).withLocale(locale);
+            case "FULL"   : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).withLocale(locale);
+            default       : return DateTimeFormatter.ofPattern(pattern, locale);
         }
     }
 

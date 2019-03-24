@@ -15,20 +15,22 @@
  */
 package org.thymeleaf.extras.java8time.expression;
 
+import org.junit.Test;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.Temporal;
 import java.util.Locale;
-import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * Tests regarding formatting of arrays of temporal objects.
  */
 public class TemporalsArrayTest {
-    
-    private final Temporals temporals = new Temporals(Locale.ENGLISH, ZoneOffset.UTC);
+
+    private final Temporals temporals = new Temporals(Locale.US, ZoneOffset.UTC);
 
     @Test
     public void testArrayFormat() {
@@ -41,7 +43,7 @@ public class TemporalsArrayTest {
     public void testArrayFormatWithLocale() {
         Temporal[] array = {LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)};
         String[] expected = {"1. Januar 2015", "31. Dezember 2015"};
-        assertArrayEquals(expected, temporals.arrayFormat(array, Locale.GERMAN));
+        assertArrayEquals(expected, temporals.arrayFormat(array, Locale.GERMANY));
     }
     
     @Test
@@ -57,7 +59,7 @@ public class TemporalsArrayTest {
         Temporal[] array = {LocalDate.of(2015, 1, 1), LocalDate.of(2015, 12, 31)};
         String pattern = "EEEE, d MMMM, yyyy";
         String[] expected = {"Donnerstag, 1 Januar, 2015", "Donnerstag, 31 Dezember, 2015"};
-        assertArrayEquals(expected, temporals.arrayFormat(array, pattern, Locale.GERMAN));
+        assertArrayEquals(expected, temporals.arrayFormat(array, pattern, Locale.GERMANY));
     }
 
     @Test

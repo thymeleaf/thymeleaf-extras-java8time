@@ -15,21 +15,21 @@
  */
 package org.thymeleaf.extras.java8time.expression;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import org.junit.Test;
+
+import java.time.*;
 import java.time.temporal.Temporal;
 import java.util.Locale;
-import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Tests regarding formatting of temporal objects.
  */
 public class TemporalsFormattingTest {
     
-    private final Temporals temporals = new Temporals(Locale.ENGLISH, ZoneOffset.UTC);
+    private final Temporals temporals = new Temporals(Locale.US, ZoneOffset.UTC);
 
     @Test
     public void testFormat() {
@@ -45,12 +45,12 @@ public class TemporalsFormattingTest {
     @Test
     public void testFormatWithLocale() {
         Temporal time = ZonedDateTime.of(2015, 12, 31, 23, 59, 45, 0, ZoneOffset.UTC);
-        assertEquals("31. Dezember 2015 um 23:59:45 Z", temporals.format(time, Locale.GERMAN));
+        assertEquals("31. Dezember 2015 um 23:59:45 Z", temporals.format(time, Locale.GERMANY));
     }
 
     @Test
     public void testFormatWithLocaleAndNullTemporal() {
-        assertNull(temporals.format(null, Locale.GERMAN));
+        assertNull(temporals.format(null, Locale.GERMANY));
     }
 
     @Test
@@ -59,6 +59,15 @@ public class TemporalsFormattingTest {
         String pattern = "yyyy-MM-dd HH:mm:ss";
         String expectd = "2015-12-31 23:59:00";
         assertEquals(expectd, temporals.format(time, pattern));
+    }
+
+    @Test
+    public void testFormatStandardPattern() {
+        Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);
+        assertEquals("12/31/15, 11:59 PM", temporals.format(time, "SHORT", Locale.US));
+        assertEquals("Dec 31, 2015, 11:59:00 PM", temporals.format(time, "MEDIUM", Locale.US));
+        assertEquals("December 31, 2015 at 11:59:00 PM Z", temporals.format(time, "LONG", Locale.US));
+        assertEquals("Thursday, December 31, 2015 at 11:59:00 PM Z", temporals.format(time, "FULL", Locale.US));
     }
 
     @Test
@@ -71,12 +80,42 @@ public class TemporalsFormattingTest {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);
         String pattern = "EEEE, d MMMM, yyyy";
         String expectd = "Donnerstag, 31 Dezember, 2015";
-        assertEquals(expectd, temporals.format(time, pattern, Locale.GERMAN));
+        assertEquals(expectd, temporals.format(time, pattern, Locale.GERMANY));
     }
 
     @Test
     public void testFormatWithPatternAndLocaleAndNullTemporal() {
-        assertNull(temporals.format(null, "y", Locale.GERMAN));
+        assertNull(temporals.format(null, "y", Locale.GERMANY));
+    }
+    
+    @Test
+    public void localTimeWithPattern() {
+        Temporal time = LocalTime.of(23, 59, 45);
+        assertEquals("23:59:45", temporals.format(time, "HH:mm:ss"));
+    }
+    
+    @Test
+    public void offsetDateTimeWithPattern() {
+        OffsetDateTime time = OffsetDateTime.of(LocalDateTime.of(2015, 12, 31, 23, 59, 45), ZoneOffset.UTC);
+        assertEquals("12/31/2015 23:59:45", temporals.format(time, "MM/dd/yyyy HH:mm:ss"));
+    }
+
+    @Test
+    public void offsetTimeWithPattern() {
+        OffsetTime time = OffsetTime.of(LocalTime.of(23, 59, 45), ZoneOffset.UTC);
+        assertEquals("23:59:45", temporals.format(time, "HH:mm:ss"));
+    }
+
+    @Test
+    public void yearWithPattern() {
+        Year time = Year.of(2015);
+        assertEquals("2015", temporals.format(time, "yyyy"));
+    }
+
+    @Test
+    public void yearMonthWithPattern() {
+        YearMonth time = YearMonth.of(2015, 12);
+        assertEquals("12/2015", temporals.format(time, "MM/yyyy"));
     }
 
     @Test
@@ -220,6 +259,13 @@ public class TemporalsFormattingTest {
     @Test
     public void testFormatISOWithNullTemporal() {
         assertNull(temporals.formatISO(null));
+    }
+
+    @Test
+    // https://github.com/thymeleaf/thymeleaf-extras-java8time/issues/17
+    public void testIssue17() {
+        Instant time = Instant.ofEpochSecond(1);
+        assertEquals("1970-01-01", temporals.format(time, "yyyy-MM-dd", Locale.US));
     }
 
 }

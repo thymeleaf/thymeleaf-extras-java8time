@@ -26,7 +26,7 @@ import static org.junit.Assert.*;
 
 public class TemporalsCreationTest {
 
-    private final Temporals temporals = new Temporals(Locale.ENGLISH);
+    private final Temporals temporals = new Temporals(Locale.US);
 
     @Test
     public void testCreateLocalDate() {

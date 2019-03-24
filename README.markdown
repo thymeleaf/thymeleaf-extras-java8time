@@ -13,7 +13,7 @@ Thymeleaf team.
 
 Current versions: 
 
-  * **Version 3.0.1.RELEASE** - for Thymeleaf 3.0 (requires Thymeleaf 3.0.0+)
+  * **Version 3.0.3.RELEASE** - for Thymeleaf 3.0 (requires Thymeleaf 3.0.0+)
   * **Version 2.1.0.RELEASE** - for Thymeleaf 2.1 (requires Thymeleaf 2.1.3+)
 
 
@@ -97,6 +97,7 @@ ${#temporals.setFormat(temporalsSet, locale)}
 
 /*
  * Format date with the specified pattern
+ * SHORT, MEDIUM, LONG and FULL can also be specified to used the default java.time.format.FormatStyle patterns
  * Also works with arrays, lists or sets
  */
 ${#temporals.format(temporal, 'dd/MMM/yyyy HH:mm')}

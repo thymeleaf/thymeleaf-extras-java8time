@@ -1,7 +1,22 @@
+3.0.4
+=====
+- When the patterns defined at java.time.format.FormatStyle (SHORT, MEDIUM, LONG, FULL) were used, Locale was ignored.
+- Added support for pattern formatting for some classes without timezone.
+
+3.0.3
+=====
+- Fixed problem formatting LocalTime with custom pattern https://github.com/thymeleaf/thymeleaf-extras-java8time/issues/20
+
 3.0.2
 =====
 - Updated SLF4j dependency to 1.7.25.
 - Added "Automatic-Module-Name: thymeleaf-extras-java8time" to MANIFEST.MF for Java 9+ JPMS.
+- Adapted expected test results to formatting rules of Java 11 LTS.
+- Fixed issue
+https://github.com/thymeleaf/thymeleaf-extras-java8time/issues/17 regarding
+formatting with custom patterns
+- Allowing SHORT, MEDIUM, LONG and FULL as pattern values to use the java.time.format.FormatStyle patterns
+- Localised formatters for OffsetDateTime and YearMonth classes
 
 3.0.1
 =====
