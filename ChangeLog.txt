@@ -1,3 +1,6 @@
+3.0.5
+=====
+
 3.0.4
 =====
 - When the patterns defined at java.time.format.FormatStyle (SHORT, MEDIUM, LONG, FULL) were used, Locale was ignored.
