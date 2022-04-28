@@ -55,11 +55,11 @@ public final class TemporalListUtils {
     }
 
     public <T extends Temporal> List<String> listFormat(final List<T> target, final String pattern) {
-        return listFormat(target, time -> temporalFormattingUtils.format(time, pattern));
+        return listFormat(target, time -> temporalFormattingUtils.format(time, pattern, null));
     }
 
     public <T extends Temporal> List<String> listFormat(final List<T> target, final String pattern, final Locale locale) {
-        return listFormat(target, time -> temporalFormattingUtils.format(time, pattern, locale));
+        return listFormat(target, time -> temporalFormattingUtils.format(time, pattern, locale, null));
     }
     
     public List<Integer> listDay(final List<? extends Temporal> target) {

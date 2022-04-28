@@ -55,11 +55,11 @@ public final class TemporalSetUtils {
     }
 
     public <T extends Temporal> Set<String> setFormat(final Set<T> target, final String pattern) {
-        return setFormat(target, time -> temporalFormattingUtils.format(time, pattern));
+        return setFormat(target, time -> temporalFormattingUtils.format(time, pattern, null));
     }
 
     public <T extends Temporal> Set<String> setFormat(final Set<T> target, final String pattern, final Locale locale) {
-        return setFormat(target, time -> temporalFormattingUtils.format(time, pattern, locale));
+        return setFormat(target, time -> temporalFormattingUtils.format(time, pattern, locale, null));
     }
 
     public Set<Integer> setDay(final Set<? extends Temporal> target) {
