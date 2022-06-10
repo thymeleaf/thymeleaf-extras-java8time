@@ -19,12 +19,16 @@
  */
 package org.thymeleaf.extras.java8time.util;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.chrono.ChronoZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.time.temporal.ChronoField;
+import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAccessor;
+import java.time.temporal.TemporalUnit;
 import java.util.Locale;
 import org.thymeleaf.exceptions.TemplateProcessingException;
 import static org.thymeleaf.extras.java8time.util.TemporalObjects.temporal;
@@ -180,7 +184,9 @@ public final class TemporalFormattingUtils {
                 formatter = TemporalObjects.formatterFor(target, formattingLocale);
                 return formatter.format(temporal(target));
             } else {
-                formatter = defaultOrPatternFormatted(pattern, formattingLocale);
+                boolean hasDate = !(target instanceof LocalTime);
+                boolean hasTime = !(target instanceof LocalDate);
+                formatter = defaultOrPatternFormatted(pattern, formattingLocale, hasDate ,hasTime);
                 return formatter.format(zonedTime(target, defaultZoneId));
             }
         } catch (final Exception e) {
@@ -189,13 +195,23 @@ public final class TemporalFormattingUtils {
         }
     }
 
-    private DateTimeFormatter defaultOrPatternFormatted(final String pattern, final Locale locale) {
+    private DateTimeFormatter defaultOrPatternFormatted(final String pattern, final Locale locale, boolean hasDate, boolean hasTime) {
         switch (pattern) {
-            case "SHORT"  : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withLocale(locale);
-            case "MEDIUM" : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(locale);
-            case "LONG"   : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG).withLocale(locale);
-            case "FULL"   : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).withLocale(locale);
+            case "SHORT"  : return buildFormatter(FormatStyle.SHORT, hasDate, hasTime).withLocale(locale);
+            case "MEDIUM" : return buildFormatter(FormatStyle.MEDIUM, hasDate, hasTime).withLocale(locale);
+            case "LONG"   : return buildFormatter(FormatStyle.LONG, hasDate, hasTime).withLocale(locale);
+            case "FULL"   : return buildFormatter(FormatStyle.FULL, hasDate, hasTime).withLocale(locale);
             default       : return DateTimeFormatter.ofPattern(pattern, locale);
+        }
+    }
+
+    private DateTimeFormatter buildFormatter(FormatStyle style, boolean hasDate, boolean hasTime) {
+        if(!hasDate && hasTime) {
+            return DateTimeFormatter.ofLocalizedTime(style);
+        } else if(hasDate && !hasTime) {
+            return DateTimeFormatter.ofLocalizedDate(style);
+        } else {
+            return DateTimeFormatter.ofLocalizedDateTime(style);
         }
     }
 
