@@ -61,16 +61,16 @@ public final class TemporalFormattingUtils {
 
     public String format(final Object target, final Locale locale) {
         Validate.notNull(locale, "Locale cannot be null");
-        return formatDate(target, null, locale);
+        return formatDate(target, null, locale, null);
     }
 
-    public String format(final Object target, final String pattern) {
-        return format(target, pattern, null);
+    public String format(final Object target, final String pattern, final ZoneId zoneId) {
+        return format(target, pattern, null, zoneId);
     }
 
-    public String format(final Object target, final String pattern, final Locale locale) {
+    public String format(final Object target, final String pattern, final Locale locale, final ZoneId zoneId) {
         Validate.notEmpty(pattern, "Pattern cannot be null or empty");
-        return formatDate(target, pattern, locale);
+        return formatDate(target, pattern, locale, zoneId);
     }
 
     public Integer day(final Object target) {
@@ -90,11 +90,11 @@ public final class TemporalFormattingUtils {
     }
 
     public String monthName(final Object target) {
-        return format(target, "MMMM");
+        return format(target, "MMMM", null);
     }
 
     public String monthNameShort(final Object target) {
-        return format(target, "MMM");
+        return format(target, "MMM", null);
     }
 
     public Integer year(final Object target) {
@@ -114,11 +114,11 @@ public final class TemporalFormattingUtils {
     }
 
     public String dayOfWeekName(final Object target) {
-        return format(target, "EEEE");
+        return format(target, "EEEE", null);
     }
 
     public String dayOfWeekNameShort(final Object target) {
-        return format(target, "EEE");
+        return format(target, "EEE", null);
     }
 
     public Integer hour(final Object target) {
@@ -166,10 +166,10 @@ public final class TemporalFormattingUtils {
     }
 
     private String formatDate(final Object target) {
-        return formatDate(target, null, null);
+        return formatDate(target, null, null, null);
     }
 
-    private String formatDate(final Object target, final String pattern, final Locale localeOverride) {
+    private String formatDate(final Object target, final String pattern, final Locale localeOverride, final ZoneId zoneId) {
         if (target == null) {
             return null;
         }
@@ -180,7 +180,7 @@ public final class TemporalFormattingUtils {
                 formatter = TemporalObjects.formatterFor(target, formattingLocale);
                 return formatter.format(temporal(target));
             } else {
-                formatter = defaultOrPatternFormatted(pattern, formattingLocale);
+                formatter = defaultOrPatternFormatted(pattern, formattingLocale, zoneId);
                 return formatter.format(zonedTime(target, defaultZoneId));
             }
         } catch (final Exception e) {
@@ -189,13 +189,13 @@ public final class TemporalFormattingUtils {
         }
     }
 
-    private DateTimeFormatter defaultOrPatternFormatted(final String pattern, final Locale locale) {
+    private DateTimeFormatter defaultOrPatternFormatted(final String pattern, final Locale locale, final ZoneId zoneId) {
         switch (pattern) {
-            case "SHORT"  : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withLocale(locale);
-            case "MEDIUM" : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(locale);
-            case "LONG"   : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG).withLocale(locale);
-            case "FULL"   : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).withLocale(locale);
-            default       : return DateTimeFormatter.ofPattern(pattern, locale);
+            case "SHORT"  : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withZone(zoneId).withLocale(locale);
+            case "MEDIUM" : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withZone(zoneId).withLocale(locale);
+            case "LONG"   : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG).withZone(zoneId).withLocale(locale);
+            case "FULL"   : return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).withZone(zoneId).withLocale(locale);
+            default       : return DateTimeFormatter.ofPattern(pattern, locale).withZone(zoneId);
         }
     }
 

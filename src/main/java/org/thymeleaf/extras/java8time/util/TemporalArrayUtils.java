@@ -54,11 +54,11 @@ public final class TemporalArrayUtils {
     }
 
     public String[] arrayFormat(final Object[] target, final String pattern) {
-        return arrayFormat(target, time -> temporalFormattingUtils.format(time, pattern), String.class);
+        return arrayFormat(target, time -> temporalFormattingUtils.format(time, pattern, null), String.class);
     }
 
     public String[] arrayFormat(final Object[] target, final String pattern, final Locale locale) {
-        return arrayFormat(target, time -> temporalFormattingUtils.format(time, pattern, locale), String.class);
+        return arrayFormat(target, time -> temporalFormattingUtils.format(time, pattern, locale, null), String.class);
     }
 
     public Integer[] arrayDay(final Object[] target) {

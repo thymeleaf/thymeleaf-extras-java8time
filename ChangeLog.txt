@@ -1,6 +1,10 @@
 3.0.5
 =====
 
+- Added method #temportals.format(target, pattern, zoneId) to allow formatting datetimes using different time zones
+- Using Thymeleaf 3.0.15.RELEASE
+- Updated SLF4J dependency to 1.7.36
+
 3.0.4
 =====
 - When the patterns defined at java.time.format.FormatStyle (SHORT, MEDIUM, LONG, FULL) were used, Locale was ignored.
