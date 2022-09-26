@@ -247,7 +247,15 @@ public final class Temporals {
      * @since 2.1.0
      */
     public String format(final Temporal target, final String pattern) {
-        return temporalFormattingUtils.format(target, pattern);
+        return temporalFormattingUtils.format(target, pattern, null);
+    }
+
+    /**
+     *
+     * @since 3.1.0
+     */
+    public String format(final Temporal target, final String pattern, final String zoneId) {
+        return temporalFormattingUtils.format(target, pattern, ZoneId.of(zoneId));
     }
 
     /**
@@ -279,7 +287,7 @@ public final class Temporals {
      * @since 2.1.1
      */
     public String format(final Temporal target, final String pattern, final Locale locale) {
-        return temporalFormattingUtils.format(target, pattern, locale);
+        return temporalFormattingUtils.format(target, pattern, locale, null);
     }
 
     /**

@@ -26,7 +26,7 @@
     <groupId>org.thymeleaf.extras</groupId>
     <artifactId>thymeleaf-extras-java8time</artifactId>
     <packaging>jar</packaging>
-    <version>3.0.5-SNAPSHOT</version>
+    <version>3.1.0-SNAPSHOT</version>
     <name>thymeleaf-extras-java8time</name>
     <url>http://www.thymeleaf.org</url>
 
@@ -115,11 +115,10 @@
         <!-- NOTE module name is fixed and not set to project.artifactId because this would not be a     -->
         <!-- valid approach for project names containing hyphens, which are not allowed in module names. -->
         <module.name>thymeleaf.extras.java8time</module.name>
-        <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
-        <slf4j.version>1.7.25</slf4j.version>
+        <thymeleaf.version>3.0.15.RELEASE</thymeleaf.version>
+        <slf4j.version>1.7.36</slf4j.version>
         <!-- The following dependencies are for testing only -->
-        <junit.version>4.12</junit.version>
-        <log4j.version>1.2.17</log4j.version>
+        <junit.version>4.13.2</junit.version>
     </properties>
 
 
@@ -153,7 +152,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.10.1</version>
             </plugin>
 
             <plugin>
@@ -169,7 +168,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.2.2</version>
                 <configuration>
                     <archive>
                         <addMavenDescriptor>false</addMavenDescriptor>
@@ -196,7 +195,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>3.4.0</version>
                 <configuration>
                     <show>protected</show>
                     <noqualifier>java.lang</noqualifier>
@@ -257,7 +256,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -285,7 +284,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.0</version>
                 <executions>
                     <!-- Copy javadoc's "element-list" file to "package-list" in order to allow projects    -->
                     <!-- using versions of the javadoc tool < JDK9 to properly link to Thymeleaf's javadoc  -->
@@ -344,30 +343,9 @@
 
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
+            <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.sun.jdmk</groupId>
-                    <artifactId>jmxtools</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.jmx</groupId>
-                    <artifactId>jmxri</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>javax.jms</groupId>
-                    <artifactId>jms</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
 

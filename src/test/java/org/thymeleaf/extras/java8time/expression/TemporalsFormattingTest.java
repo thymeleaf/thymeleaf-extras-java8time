@@ -62,6 +62,14 @@ public class TemporalsFormattingTest {
     }
 
     @Test
+    public void testFormatWithPatternAndZone() {
+        Temporal time = ZonedDateTime.of(2015, 12, 31, 23, 59, 0, 1, ZoneOffset.UTC);
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        String expectd = "2015-12-31 18:59:00";
+        assertEquals(expectd, temporals.format(time, pattern, "Etc/GMT+5"));
+    }
+
+    @Test
     public void testFormatStandardPattern() {
         Temporal time = LocalDateTime.of(2015, 12, 31, 23, 59);
         assertEquals("12/31/15, 11:59 PM", temporals.format(time, "SHORT", Locale.US));

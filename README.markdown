@@ -13,7 +13,7 @@ Thymeleaf team.
 
 Current versions: 
 
-  * **Version 3.0.4.RELEASE** - for Thymeleaf 3.0 (requires Thymeleaf 3.0.0+)
+  * **Version 3.1.0.RELEASE** - for Thymeleaf 3.0 (requires Thymeleaf 3.0.0+)
   * **Version 2.1.0.RELEASE** - for Thymeleaf 2.1 (requires Thymeleaf 2.1.3+)
 
 
@@ -101,6 +101,7 @@ ${#temporals.setFormat(temporalsSet, locale)}
  * Also works with arrays, lists or sets
  */
 ${#temporals.format(temporal, 'dd/MMM/yyyy HH:mm')}
+${#temporals.format(temporal, 'dd/MMM/yyyy HH:mm', 'Europe/Paris')}
 ${#temporals.arrayFormat(temporalsArray, 'dd/MMM/yyyy HH:mm')}
 ${#temporals.listFormat(temporalsList, 'dd/MMM/yyyy HH:mm')}
 ${#temporals.setFormat(temporalsSet, 'dd/MMM/yyyy HH:mm')}
